@@ -19,15 +19,15 @@ namespace RealMenGame.Scripts
             Health.Value -= damage;
         }
 
-        public void OnShoot(Transform target)
+        public void OnShoot(Vector3 position)
         {
-            Shoot(target).Forget();
+            Shoot(position).Forget();
         }
 
-        private async UniTask Shoot(Transform target)
+        private async UniTask Shoot(Vector3 position)
         {
             IsShooting = true;
-            await shaurma.FlyTo(target);
+            await shaurma.FlyTo(position);
             shaurma.ResetShaurma();
             IsShooting = false;
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RealMenGame.Scripts.Bandits;
+using UnityEngine;
 
 namespace RealMenGame.Scripts
 {
@@ -18,11 +19,12 @@ namespace RealMenGame.Scripts
                 var ray = _camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var hit))
                 {
-                    var target = hit.collider.gameObject.GetComponent<Target>();
+                    var target = hit.collider.gameObject.GetComponent<BanditController>();
                     if (target != null)
                     {
-                        LarekManager.Instance.OnShoot(target.transform);
+                        // Послать шаурму бандиту
                     }
+                    LarekManager.Instance.OnShoot(hit.point);
                 }
             }
         }

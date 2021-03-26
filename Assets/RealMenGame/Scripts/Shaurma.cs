@@ -16,9 +16,9 @@ namespace RealMenGame.Scripts
             Ingredients.Add(ingredientType);
         }
 
-        public async UniTask FlyTo(Transform target)
+        public async UniTask FlyTo(Vector3 position)
         {
-            await transform.DOMove(target.position, 1f).AsyncWaitForCompletion();
+            await transform.DOMove(position, 0.2f).AsyncWaitForCompletion();
         }
 
         public void ResetShaurma()
