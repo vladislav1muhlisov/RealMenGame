@@ -11,6 +11,7 @@ namespace RealMenGame.Scripts.UI
     {
         [SerializeField] private IngredientType ingredientType;
         [SerializeField] private List<Image> slots;
+        [SerializeField] private List<Button> buttons;
         private List<Ingredient> _ingredients;
 
         private readonly List<Ingredient> _ingredientsSlots = new List<Ingredient>
@@ -23,6 +24,12 @@ namespace RealMenGame.Scripts.UI
 
         private void Awake()
         {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                var i1 = i;
+                buttons[i].onClick.AddListener(() => OnSlotClick(i1));
+            }
+
             _ingredients = IngredientsConfigLoader.Instance.Ingredients[ingredientType].Values
                 .OrderBy(ingredient => ingredient.Id).ToList();
             if (ingredientType != IngredientType.Lavash)
@@ -46,6 +53,26 @@ namespace RealMenGame.Scripts.UI
                 {
                     RotateDown().Forget();
                 }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].onClick.RemoveAllListeners();
+            }
+        }
+
+        private void OnSlotClick(int index)
+        {
+            if (index == 0)
+            {
+                RotateUp().Forget();
+            }
+            else if (index == 2)
+            {
+                RotateDown().Forget();
             }
         }
 
