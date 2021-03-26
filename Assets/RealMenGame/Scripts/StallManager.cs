@@ -43,8 +43,6 @@ namespace RealMenGame.Scripts
                 .DOMove(dir * DistanceToFly, DistanceToFly / _kebabSpeed)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => Destroy(kebabProjectile.gameObject));
-
-            shaurma.ResetShaurma();
         }
 
         public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)

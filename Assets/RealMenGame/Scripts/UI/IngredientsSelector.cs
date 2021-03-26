@@ -37,7 +37,7 @@ namespace RealMenGame.Scripts.UI
                 _ingredients.Insert(0, null);
             }
 
-            _currentLowSlotIngredientIndex = 0;
+            _currentLowSlotIngredientIndex = _ingredients.Count - 1;
             UpdateSlots();
         }
 

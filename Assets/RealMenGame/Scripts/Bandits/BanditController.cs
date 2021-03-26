@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DG.Tweening;
+using RealMenGame.Scripts.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,7 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] private Animator _animator;
         [SerializeField] public BanditState CurrentState;
         [SerializeField] private int _damage;
+        [SerializeField] private ShaurmaDisplay _shaurmaDisplay;
         [SerializeField] public KebabIngredients Ingredients;
 
         public int BanditIndex;
@@ -32,12 +34,13 @@ namespace RealMenGame.Scripts.Bandits
         {
             var projectile = other.GetComponent<KebabProjectile>();
             var kebabIngredients = projectile.Ingredients;
-            
+
             if (CurrentState == BanditState.MovingToStall)
             {
-                var theSame = Ingredients.Ingredients.Count != 0 && 
+                var theSame = Ingredients.Ingredients.Count != 0 &&
                               kebabIngredients.Ingredients.Count != 0 &&
-                              Ingredients.Ingredients.All(ingredient => kebabIngredients.Ingredients[ingredient.Key] == ingredient.Value);
+                              Ingredients.Ingredients.All(ingredient =>
+                                  kebabIngredients.Ingredients[ingredient.Key] == ingredient.Value);
 
                 _animator.SetBool(IsKebabRightHash, theSame);
                 _animator.SetTrigger(KebabCaughtHash);
@@ -45,16 +48,16 @@ namespace RealMenGame.Scripts.Bandits
                 if (theSame)
                 {
                     CurrentState = BanditState.MovingAway;
-                    
+
                     var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
 
                     _navMeshAgent.SetDestination(awayPoint.position);
                 }
             }
-            
+
             projectile.TweenHandle.Kill();
             other.enabled = false;
-            
+
             Destroy(other.gameObject);
         }
 
@@ -97,6 +100,7 @@ namespace RealMenGame.Scripts.Bandits
         private void ProcessSpawned()
         {
             Ingredients.Ingredients = IngredientsRandomGeneratorUtil.Generate();
+            _shaurmaDisplay.SetIngredients(Ingredients.Ingredients);
 
             CurrentState = BanditState.MovingToStall;
 
@@ -107,9 +111,9 @@ namespace RealMenGame.Scripts.Bandits
         private void ProcessMovingToStall()
         {
             if (IsDestinationReached == false) return;
-            
+
             CurrentState = BanditState.ReachedStall;
-                
+
             var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
 
             _navMeshAgent.SetDestination(awayPoint.position);
