@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +44,7 @@ namespace RealMenGame.Scripts
 
         public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)
         {
+            Ingredients[ingredientType] = ingredient;
             if (ingredient == null)
             {
                 Images[ingredientType].gameObject.SetActive(false);

@@ -30,8 +30,6 @@ namespace RealMenGame.Scripts
 
         public void OnShoot(Vector3 position)
         {
-            if (shaurma.Ingredients.Count != 4) return;
-            
             var kebabPosition = _kebabStartPosition.position;
             var kebabProjectile = Instantiate(_kebabProjectilePrefab, kebabPosition, Quaternion.identity);
 
@@ -41,10 +39,11 @@ namespace RealMenGame.Scripts
 
             var dir = (position - kebabPosition).normalized;
 
-            kebabProjectile.TweenHandle = kebabProjectile.transform.DOMove(dir * DistanceToFly, DistanceToFly / _kebabSpeed)
+            kebabProjectile.TweenHandle = kebabProjectile.transform
+                .DOMove(dir * DistanceToFly, DistanceToFly / _kebabSpeed)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => Destroy(kebabProjectile.gameObject));
-            
+
             shaurma.ResetShaurma();
         }
 

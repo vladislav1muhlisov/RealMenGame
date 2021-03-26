@@ -96,6 +96,8 @@ namespace RealMenGame.Scripts.Bandits
 
         private void ProcessSpawned()
         {
+            Ingredients.Ingredients = IngredientsRandomGeneratorUtil.Generate();
+
             CurrentState = BanditState.MovingToStall;
 
             _navMeshAgent.enabled = true;
