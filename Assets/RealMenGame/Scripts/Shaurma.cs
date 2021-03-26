@@ -18,27 +18,30 @@ namespace RealMenGame.Scripts
         public Dictionary<IngredientType, int> Ingredients = new Dictionary<IngredientType, int>();
 
 
-        private Dictionary<IngredientType, Image> images;
-        private Dictionary<IngredientType, List<Sprite>> sprites;
+        private Dictionary<IngredientType, Image> _images;
+
+        private Dictionary<IngredientType, Image> Images
+        {
+            get
+            {
+                if (_images == null)
+                {
+                    _images = new Dictionary<IngredientType, Image>
+                    {
+                        {IngredientType.Lavash, lavashImage},
+                        {IngredientType.Meat, meatImage},
+                        {IngredientType.Vegetables, vegetablesImage},
+                        {IngredientType.Sauce, sauceImage},
+                    };
+                }
+
+                return _images;
+            }
+        }
+
 
         private void Awake()
         {
-            images = new Dictionary<IngredientType, Image>
-            {
-                {IngredientType.Lavash, lavashImage},
-                {IngredientType.Meat, meatImage},
-                {IngredientType.Vegetables, vegetablesImage},
-                {IngredientType.Sauce, sauceImage},
-            };
-            var spritesConfig = SpritesConfig.Instance;
-
-            sprites = new Dictionary<IngredientType, List<Sprite>>
-            {
-                {IngredientType.Lavash, spritesConfig.LavashSprites},
-                {IngredientType.Meat, spritesConfig.MeatSprites},
-                {IngredientType.Vegetables, spritesConfig.VegetablesSprites},
-                {IngredientType.Sauce, spritesConfig.SauceSprites}
-            };
             ResetShaurma();
         }
 
@@ -47,12 +50,13 @@ namespace RealMenGame.Scripts
             Ingredients[ingredientType] = number;
             if (number == -1)
             {
-                images[ingredientType].gameObject.SetActive(false);
+                Images[ingredientType].gameObject.SetActive(false);
             }
             else
             {
-                images[ingredientType].gameObject.SetActive(true);
-                images[ingredientType].sprite = sprites[ingredientType][number];
+                Images[ingredientType].gameObject.SetActive(true);
+                Images[ingredientType].sprite =
+                    IngredientsConfigLoader.Instance.Ingredients[ingredientType][number].Sprite;
             }
         }
 

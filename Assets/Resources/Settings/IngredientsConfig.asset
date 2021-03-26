@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41ae97d85fe4f3f8b74226528c259d7, type: 3}
+  m_Name: IngredientsConfig
+  m_EditorClassIdentifier: 
+  LavashSprites:
+  - Id: 0
+    Sprite: {fileID: 21300000, guid: dfae5aa99d0490941bec1c9f68102671, type: 3}
+  - Id: 1
+    Sprite: {fileID: 21300000, guid: 229357f09b7dd5b4bb8c45969ae2a332, type: 3}
+  - Id: 2
+    Sprite: {fileID: 21300000, guid: 53451fd54cfbcf145ae7b35f9b603017, type: 3}
+  VegetablesSprites:
+  - Id: 0
+    Sprite: {fileID: 21300000, guid: 6cee8d50ac5fff54a950ad3e6c3cdaaf, type: 3}
+  - Id: 1
+    Sprite: {fileID: 21300000, guid: a6246ca128c5a2f4a867b7379ee47bbd, type: 3}
+  - Id: 2
+    Sprite: {fileID: 21300000, guid: d3f62f1630168ca4e8573359fbc2c581, type: 3}
+  MeatSprites:
+  - Id: 0
+    Sprite: {fileID: 21300000, guid: bbd699f03dbf3fc44bd3f05d934c1f68, type: 3}
+  - Id: 1
+    Sprite: {fileID: 21300000, guid: f59b0c9c8310bee4ab43a2aa0054e20f, type: 3}
+  - Id: 2
+    Sprite: {fileID: 21300000, guid: a1a017379ace49e41bc6f70d806e7f25, type: 3}
+  SauceSprites:
+  - Id: 0
+    Sprite: {fileID: 21300000, guid: ef16ef6512b9c3e4ebc87f778cb0427a, type: 3}
+  - Id: 1
+    Sprite: {fileID: 21300000, guid: 9c980fcc790931a45970073020d8a684, type: 3}
+  - Id: 2
+    Sprite: {fileID: 21300000, guid: 75fc06fdc63eb4847b40d17fc24cbf78, type: 3}
