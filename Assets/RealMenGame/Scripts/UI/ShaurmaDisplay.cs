@@ -35,7 +35,7 @@ namespace RealMenGame.Scripts.UI
 
         private void Update()
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.LookAt(Camera.main.transform);
         }
 
         public void SetIngredients(Dictionary<IngredientType, Ingredient> ingredients)
