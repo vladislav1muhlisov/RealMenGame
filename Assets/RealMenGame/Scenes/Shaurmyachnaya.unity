@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientSkyColor: {r: 0, g: 0.062173605, b: 0.4245283, a: 1}
+  m_AmbientEquatorColor: {r: 0.009582283, g: 0.11138007, b: 0.1792453, a: 1}
+  m_AmbientGroundColor: {r: 0.018155923, g: 0.041337993, b: 0.084905684, a: 1}
+  m_AmbientIntensity: 0.41
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -1245,6 +1245,26 @@ PrefabInstance:
     - target: {fileID: 7026911757708701079, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404929932611715965, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404929932611715965, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404929932611715965, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404929932611715965, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404929932611715965, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7406240104168499055, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
       propertyPath: m_StaticEditorFlags
