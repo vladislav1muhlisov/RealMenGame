@@ -164,14 +164,14 @@ namespace RealMenGame.Scripts.UI
             var scaling = UniTask.WhenAll(
                 buttons[0].transform.DOScale(delta < 0 ? Vector3.one : _smallScale, AnimationDuration).ToUniTask(),
                 buttons[1].transform.DOScale(_smallScale, AnimationDuration).ToUniTask(),
-                buttons[2].transform.DOScale(delta > 0 ? Vector3.one : _smallScale, AnimationDuration).ToUniTask(),
-                fakeButtonTransform.DOScale(Vector3.one, AnimationDuration).ToUniTask());
+                buttons[2].transform.DOScale(delta > 0 ? Vector3.one : _smallScale, AnimationDuration).ToUniTask());
 
             var fakeButtonMoving =
                 fakeButtonTransform.DOLocalMove(centralPosition - deltaPositionSigned, AnimationDuration)
                     .ToUniTask();
 
             await UniTask.WhenAll(moving, scaling, fakeButtonMoving);
+
 
             buttons[0].transform.localScale = _smallScale;
             buttons[1].transform.localScale = Vector3.one;
@@ -181,6 +181,7 @@ namespace RealMenGame.Scripts.UI
             buttons[1].transform.localPosition = centralPosition;
             buttons[2].transform.localPosition = centralPosition - deltaPosition;
 
+            fakeButtonTransform.localScale = _smallScale;
             fakeButtonTransform.localPosition = centralPosition + deltaPositionSigned * 2;
 
             UpdateSlots();
@@ -188,13 +189,13 @@ namespace RealMenGame.Scripts.UI
 
         private void SetFakeButtonSprite(int delta)
         {
-            int indexForLowNextSprite = _currentLowSlotIngredientIndex - 1;
+            int indexForLowNextSprite = _currentLowSlotIngredientIndex - 1 - delta;
             if (indexForLowNextSprite < 0)
             {
                 indexForLowNextSprite = _ingredients.Count - 1;
             }
 
-            int indexForUpperNextImage = (_currentLowSlotIngredientIndex + 2) % _ingredients.Count;
+            int indexForUpperNextImage = (_currentLowSlotIngredientIndex + 3 - delta) % _ingredients.Count;
 
             var ingredient = delta > 0 ? _ingredients[indexForUpperNextImage] : _ingredients[indexForLowNextSprite];
             if (ingredient == null)
