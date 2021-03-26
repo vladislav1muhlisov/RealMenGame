@@ -14,7 +14,7 @@ namespace RealMenGame.Scripts
 
         [SerializeField] private GameObject canvas;
 
-        public Dictionary<IngredientType, int> Ingredients = new Dictionary<IngredientType, int>();
+        public Dictionary<IngredientType, Ingredient> Ingredients = new Dictionary<IngredientType, Ingredient>();
 
 
         private Dictionary<IngredientType, Image> _images;
@@ -44,18 +44,16 @@ namespace RealMenGame.Scripts
             ResetShaurma();
         }
 
-        public void SetIngredient(IngredientType ingredientType, int number)
+        public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)
         {
-            Ingredients[ingredientType] = number;
-            if (number == -1)
+            if (ingredient == null)
             {
                 Images[ingredientType].gameObject.SetActive(false);
             }
             else
             {
                 Images[ingredientType].gameObject.SetActive(true);
-                Images[ingredientType].sprite =
-                    IngredientsConfigLoader.Instance.Ingredients[ingredientType][number].Sprite;
+                Images[ingredientType].sprite = ingredient.Sprite;
             }
         }
 
@@ -67,10 +65,11 @@ namespace RealMenGame.Scripts
 
         public void ResetShaurma()
         {
-            SetIngredient(IngredientType.Lavash, 0);
-            SetIngredient(IngredientType.Meat, -1);
-            SetIngredient(IngredientType.Vegetables, -1);
-            SetIngredient(IngredientType.Sauce, -1);
+            SetIngredient(IngredientType.Lavash,
+                IngredientsConfigLoader.Instance.Ingredients[IngredientType.Lavash][0]);
+            SetIngredient(IngredientType.Meat, null);
+            SetIngredient(IngredientType.Vegetables, null);
+            SetIngredient(IngredientType.Sauce, null);
             
             transform.localPosition = Vector3.zero;
             canvas.SetActive(true);

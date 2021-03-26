@@ -17,7 +17,6 @@ namespace RealMenGame.Scripts.UI
 
         public void OnClick()
         {
-            StallManager.Instance.SetIngredient(ingredientType, ingredient);
         }
     }
 }

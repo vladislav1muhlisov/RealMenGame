@@ -18,7 +18,7 @@ namespace RealMenGame.Scripts.UI
             null, null, null
         };
 
-        private int _currentLowSlotIngredientId;
+        private int _currentLowSlotIngredientIndex;
         private bool _isPointerEnter;
 
         private void Awake()
@@ -30,7 +30,7 @@ namespace RealMenGame.Scripts.UI
                 _ingredients.Insert(0, null);
             }
 
-            _currentLowSlotIngredientId = 0;
+            _currentLowSlotIngredientIndex = 0;
             UpdateSlots();
         }
 
@@ -53,7 +53,7 @@ namespace RealMenGame.Scripts.UI
         {
             for (int i = 0; i < 3; i++)
             {
-                Ingredient ingredient = _ingredients[(_currentLowSlotIngredientId + i) % _ingredients.Count];
+                Ingredient ingredient = _ingredients[(_currentLowSlotIngredientIndex + i) % _ingredients.Count];
                 _ingredientsSlots[i] = ingredient;
                 if (ingredient != null)
                 {
@@ -66,22 +66,22 @@ namespace RealMenGame.Scripts.UI
             }
 
             var selectedIngredient = _ingredientsSlots[1];
-            LarekManager.Instance.SetIngredient(ingredientType, selectedIngredient?.Id ?? -1);
+            StallManager.Instance.SetIngredient(ingredientType, selectedIngredient);
         }
 
         private async UniTask RotateUp()
         {
-            _currentLowSlotIngredientId++;
-            _currentLowSlotIngredientId %= slots.Count;
+            _currentLowSlotIngredientIndex++;
+            _currentLowSlotIngredientIndex %= _ingredients.Count;
             UpdateSlots();
         }
 
         private async UniTask RotateDown()
         {
-            _currentLowSlotIngredientId--;
-            if (_currentLowSlotIngredientId < 0)
+            _currentLowSlotIngredientIndex--;
+            if (_currentLowSlotIngredientIndex < 0)
             {
-                _currentLowSlotIngredientId = _ingredients[_ingredients.Count - 1].Id;
+                _currentLowSlotIngredientIndex = _ingredients.Count - 1;
             }
 
             UpdateSlots();

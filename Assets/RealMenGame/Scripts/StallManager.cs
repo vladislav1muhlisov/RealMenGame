@@ -30,9 +30,9 @@ namespace RealMenGame.Scripts
             shaurma.ResetShaurma();
         }
 
-        public void SetIngredient(IngredientType ingredientType, int number)
+        public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)
         {
-            shaurma.SetIngredient(ingredientType, number);
+            shaurma.SetIngredient(ingredientType, ingredient);
         }
     }
 }
