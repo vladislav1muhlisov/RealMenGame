@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/RealMenGame/Scenes/MainMenu.unity
+    guid: a7e69e360d327594089e9b5428379217
+  - enabled: 1
+    path: Assets/RealMenGame/Scenes/Shaurmyachnaya.unity
+    guid: 3442387bf487a13409c30beb273ab77d
   m_configObjects: {}
