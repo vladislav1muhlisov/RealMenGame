@@ -2432,6 +2432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 690109501561703129}
+  _animator: {fileID: 1174389288363622513}
   CurrentState: 0
   BanditIndex: 0
 --- !u!195 &690109501561703129
