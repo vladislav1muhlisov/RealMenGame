@@ -17,13 +17,14 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] private Animator _animator;
         [SerializeField] public BanditState CurrentState;
         [SerializeField] private int _damage;
+        [SerializeField] private int _score = 100;
         [SerializeField] private ShaurmaDisplay _shaurmaDisplay;
         [SerializeField] private KebabIngredients Ingredients;
 
         public Mood Mood;
 
         public BanditSettings Settings;
-        
+
         public Transform[] WayPoints;
         private int _currentWayPoint;
 
@@ -47,24 +48,30 @@ namespace RealMenGame.Scripts.Bandits
             var projectile = other.GetComponent<KebabProjectile>();
             var kebabIngredients = projectile.Ingredients;
 
-            if ((CurrentState == BanditState.OnWay || CurrentState == BanditState.MovingToStall) && _navMeshAgent.enabled)
+            if ((CurrentState == BanditState.OnWay || CurrentState == BanditState.MovingToStall) &&
+                _navMeshAgent.enabled)
             {
                 var theSame = Ingredients.Ingredients.Count != 0 &&
                               kebabIngredients.Ingredients.Count != 0 &&
                               Ingredients.Ingredients.All(ingredient =>
                                   kebabIngredients.Ingredients[ingredient.Key] == ingredient.Value);
 
+                if (theSame)
+                {
+                    projectile.RaiseOnSuccess(_score);
+                }
+
                 _animator.SetBool(IsKebabRightHash, theSame);
                 _animator.SetTrigger(KebabCaughtHash);
-                
+
                 _navMeshAgent.enabled = false;
-                
+
                 var delay = TimeSpan.FromSeconds(theSame ? Settings.AnimationRightDelay : Settings.AnimationWrongDelay);
 
                 if (theSame)
                 {
                     CurrentState = BanditState.MovingAway;
-                    
+
                     Observable.Timer(delay).Subscribe(_ =>
                     {
                         _shaurmaDisplay.gameObject.SetActive(false);
@@ -75,7 +82,7 @@ namespace RealMenGame.Scripts.Bandits
 
                         _navMeshAgent.enabled = true;
                         _navMeshAgent.speed = Settings.AwaySpeed;
-                        
+
                         _navMeshAgent.SetDestination(awayPoint.position);
                         _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                     });
@@ -134,10 +141,10 @@ namespace RealMenGame.Scripts.Bandits
         private void ProcessSpawned()
         {
             Ingredients.Ingredients = IngredientsRandomGeneratorUtil.Generate();
-            
+
             _shaurmaDisplay.gameObject.SetActive(true);
             _shaurmaDisplay.SetIngredients(Ingredients.Ingredients);
-            
+
             Mood.gameObject.SetActive(false);
 
             CurrentState = BanditState.OnWay;
@@ -171,15 +178,15 @@ namespace RealMenGame.Scripts.Bandits
             if (IsDestinationReached == false) return;
 
             CurrentState = BanditState.ReachedStall;
-            
+
             StallManager.Instance.SetDamage(_damage);
             _shaurmaDisplay.gameObject.SetActive(false);
-            
+
             Mood.gameObject.SetActive(true);
             Mood.SetMood(false);
 
             var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
-            
+
             _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
             _navMeshAgent.SetDestination(awayPoint.position);
         }

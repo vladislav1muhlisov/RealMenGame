@@ -39,10 +39,17 @@ namespace RealMenGame.Scripts
 
             var dir = (position - kebabPosition).normalized;
 
+            kebabProjectile.OnSuccess += OnSuccess;
             kebabProjectile.TweenHandle = kebabProjectile.transform
                 .DOMove(dir * DistanceToFly, DistanceToFly / _kebabSpeed)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => Destroy(kebabProjectile.gameObject));
+        }
+
+        private void OnSuccess(KebabProjectile projectile, int score)
+        {
+            projectile.OnSuccess -= OnSuccess;
+            Score.Value += score;
         }
 
         public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)
