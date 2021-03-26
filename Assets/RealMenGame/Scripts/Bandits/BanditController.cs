@@ -10,16 +10,53 @@ namespace RealMenGame.Scripts.Bandits
         private NavMeshAgent _navMeshAgent;
 
         private Transform _target;
+        [SerializeField]
         private BanditState _currentState;
 
         private enum BanditState
         {
+            Spawned,
             MovingToStall,
             ReachedStall,
-            MovingAway
+            MovingAway,
+            Done
         }
 
-        private void Start()
+        private bool IsDestinationReached
+        {
+            get
+            {
+                if (_navMeshAgent.pathPending) return false;
+                if (_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) return false;
+
+                return _navMeshAgent.hasPath == false || _navMeshAgent.velocity.sqrMagnitude == 0f;
+            }
+        }
+
+        private void Update()
+        {
+            switch (_currentState)
+            {
+                case BanditState.Spawned:
+                    ProcessSpawned();
+                    break;
+                case BanditState.MovingAway:
+                    ProcessMovingAway();
+                    break;
+                case BanditState.ReachedStall:
+                    _currentState = BanditState.MovingAway;
+                    break;
+                case BanditState.MovingToStall:
+                    ProcessMovingToStall();
+                    break;
+                case BanditState.Done:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void ProcessSpawned()
         {
             _target = LarekManager.Instance.transform;
 
@@ -28,37 +65,23 @@ namespace RealMenGame.Scripts.Bandits
             _navMeshAgent.SetDestination(_target.position);
         }
 
-        private void Update()
-        {
-            switch (_currentState)
-            {
-                case BanditState.MovingAway:
-                    break;
-                case BanditState.ReachedStall:
-                    break;
-                case BanditState.MovingToStall:
-                    ProcessMovingToStall();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
         private void ProcessMovingToStall()
         {
-            if (_navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
-            {
-                _currentState = BanditState.ReachedStall;
-            }
-                    
-            _navMeshAgent.SetDestination(_target.position);
+            if (IsDestinationReached == false) return;
+            
+            _currentState = BanditState.ReachedStall;
+                
+            var awayPoint = SpawnPointsManager.Instance.GetRandomAwayPoint();
+
+            _navMeshAgent.SetDestination(awayPoint.position);
         }
 
         private void ProcessMovingAway()
         {
-            var awayPoint = SpawnPointsManager.Instance.GetRandomAwayPoint();
+            if (IsDestinationReached == false) return;
 
-            _navMeshAgent.SetDestination(awayPoint.position);
+            _currentState = BanditState.Done;
+            _navMeshAgent.enabled = false;
         }
 
         private void OnValidate()
