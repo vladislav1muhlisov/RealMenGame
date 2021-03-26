@@ -8,5 +8,11 @@ namespace RealMenGame.Scripts.Settings
     {
         public BanditController Prefab;
         public int Damage;
+        
+        public float AnimationRightDelay = 3.5f;
+        public float AnimationWrongDelay = 6.333f;
+
+        public float AwaySpeed;
+        public float NormalSpeed;
     }
 }

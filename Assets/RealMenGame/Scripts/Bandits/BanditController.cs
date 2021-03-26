@@ -1,7 +1,11 @@
-﻿using System;
+﻿//using System;
+
+using System;
 using System.Linq;
 using DG.Tweening;
+using RealMenGame.Scripts.Settings;
 using RealMenGame.Scripts.UI;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +20,10 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] private ShaurmaDisplay _shaurmaDisplay;
         [SerializeField] private KebabIngredients Ingredients;
 
+        public Mood Mood;
+
+        public BanditSettings Settings;
+        
         public Transform[] WayPoints;
         private int _currentWayPoint;
 
@@ -39,7 +47,7 @@ namespace RealMenGame.Scripts.Bandits
             var projectile = other.GetComponent<KebabProjectile>();
             var kebabIngredients = projectile.Ingredients;
 
-            if (CurrentState == BanditState.MovingToStall)
+            if ((CurrentState == BanditState.OnWay || CurrentState == BanditState.MovingToStall) && _navMeshAgent.enabled)
             {
                 var theSame = Ingredients.Ingredients.Count != 0 &&
                               kebabIngredients.Ingredients.Count != 0 &&
@@ -48,15 +56,33 @@ namespace RealMenGame.Scripts.Bandits
 
                 _animator.SetBool(IsKebabRightHash, theSame);
                 _animator.SetTrigger(KebabCaughtHash);
+                
+                _navMeshAgent.enabled = false;
+                
+                var delay = TimeSpan.FromSeconds(theSame ? Settings.AnimationRightDelay : Settings.AnimationWrongDelay);
 
                 if (theSame)
                 {
                     CurrentState = BanditState.MovingAway;
+                    
+                    Observable.Timer(delay).Subscribe(_ =>
+                    {
+                        _shaurmaDisplay.gameObject.SetActive(false);
+                        Mood.gameObject.SetActive(true);
+                        Mood.SetMood(true);
 
-                    var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
+                        var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
 
-                    _navMeshAgent.SetDestination(awayPoint.position);
-                    _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                        _navMeshAgent.enabled = true;
+                        _navMeshAgent.speed = Settings.AwaySpeed;
+                        
+                        _navMeshAgent.SetDestination(awayPoint.position);
+                        _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+                    });
+                }
+                else
+                {
+                    Observable.Timer(delay).Subscribe(_ => _navMeshAgent.enabled = true);
                 }
             }
 
@@ -70,6 +96,7 @@ namespace RealMenGame.Scripts.Bandits
         {
             get
             {
+                if (_navMeshAgent.enabled == false) return false;
                 if (_navMeshAgent.pathPending) return false;
                 if (_navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance) return false;
 
@@ -107,13 +134,18 @@ namespace RealMenGame.Scripts.Bandits
         private void ProcessSpawned()
         {
             Ingredients.Ingredients = IngredientsRandomGeneratorUtil.Generate();
+            
+            _shaurmaDisplay.gameObject.SetActive(true);
             _shaurmaDisplay.SetIngredients(Ingredients.Ingredients);
+            
+            Mood.gameObject.SetActive(false);
 
             CurrentState = BanditState.OnWay;
 
             _currentWayPoint = 0;
 
             _navMeshAgent.enabled = true;
+            _navMeshAgent.speed = Settings.NormalSpeed;
             _navMeshAgent.SetDestination(WayPoints[_currentWayPoint].position);
         }
 
@@ -141,6 +173,10 @@ namespace RealMenGame.Scripts.Bandits
             CurrentState = BanditState.ReachedStall;
             
             StallManager.Instance.SetDamage(_damage);
+            _shaurmaDisplay.gameObject.SetActive(false);
+            
+            Mood.gameObject.SetActive(true);
+            Mood.SetMood(false);
 
             var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
             

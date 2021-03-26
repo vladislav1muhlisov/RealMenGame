@@ -35,7 +35,7 @@ namespace RealMenGame.Scripts.UI
 
         private void Update()
         {
-            transform.LookAt(Camera.main.transform);
+            transform.LookAt(Camera.main.transform.position, Vector3.up);
         }
 
         public void SetIngredients(Dictionary<IngredientType, Ingredient> ingredients)
