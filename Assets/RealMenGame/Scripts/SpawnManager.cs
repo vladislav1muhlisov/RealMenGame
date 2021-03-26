@@ -86,7 +86,8 @@ namespace RealMenGame.Scripts
                 var bandit = _pools[banditIndex].Spawn();
 
                 var spawnPoint = GetRandomSpawnPoint();
-                
+
+                bandit.Settings = LevelSettings.PossibleBandits[banditIndex];
                 bandit.transform.position = spawnPoint.transform.position;
                 bandit.WayPoints = spawnPoint.GetRandomWay().WayPoints;
                 

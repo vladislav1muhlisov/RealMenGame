@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: Biker
   m_EditorClassIdentifier: 
   Prefab: {fileID: 5142454544840464237, guid: 3e81b04b8abee794fa08e66f2bbe82b2, type: 3}
+  Damage: 0
+  AnimationRightDelay: 3.5
+  AnimationWrongDelay: 6.333
+  AwaySpeed: 0.8
+  NormalSpeed: 0.4
