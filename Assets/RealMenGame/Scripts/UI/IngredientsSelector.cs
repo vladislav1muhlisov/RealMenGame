@@ -57,11 +57,12 @@ namespace RealMenGame.Scripts.UI
                 _ingredientsSlots[i] = ingredient;
                 if (ingredient != null)
                 {
+                    slots[i].gameObject.SetActive(true);
                     slots[i].sprite = ingredient.Sprite;
                 }
                 else
                 {
-                    slots[i].sprite = null;
+                    slots[i].gameObject.SetActive(false);
                 }
             }
 

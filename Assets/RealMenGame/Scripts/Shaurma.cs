@@ -70,7 +70,7 @@ namespace RealMenGame.Scripts
             SetIngredient(IngredientType.Meat, null);
             SetIngredient(IngredientType.Vegetables, null);
             SetIngredient(IngredientType.Sauce, null);
-            
+
             transform.localPosition = Vector3.zero;
             canvas.SetActive(true);
         }
