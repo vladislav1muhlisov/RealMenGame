@@ -12,9 +12,9 @@ namespace RealMenGame.Scripts
 
         public Transform GetRandomTarget() => _targets[Random.Range(0, _targets.Length)];
 
-        public ReactiveProperty<int> Health = new ReactiveProperty<int>();
+        public ReactiveProperty<int> Health = new ReactiveProperty<int>(MaxHealth);
         public ReactiveProperty<int> Score = new ReactiveProperty<int>();
-        public const int MaxHealth = 10;
+        public const int MaxHealth = 100;
 
         public void SetDamage(int damage)
         {

@@ -1,5 +1,4 @@
-﻿using System;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 
 namespace RealMenGame.Scripts.UI
@@ -12,7 +11,7 @@ namespace RealMenGame.Scripts.UI
 
         private void Awake()
         {
-            StallManager.Instance.Score.Subscribe(OnHealthChanged).AddTo(_compositeDisposable);
+            StallManager.Instance.Health.Subscribe(OnHealthChanged).AddTo(_compositeDisposable);
         }
 
         private void OnDestroy()
@@ -22,7 +21,7 @@ namespace RealMenGame.Scripts.UI
 
         private void OnHealthChanged(int health)
         {
-            var heartsToActivate = Mathf.RoundToInt((float) health * _hearts.Length / StallManager.MaxHealth);
+            var heartsToActivate = Mathf.CeilToInt((float) health * _hearts.Length / StallManager.MaxHealth);
             for (int i = 0; i < _hearts.Length; i++)
             {
                 _hearts[i].SetActive(heartsToActivate > i);
