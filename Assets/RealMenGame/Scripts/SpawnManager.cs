@@ -77,9 +77,9 @@ namespace RealMenGame.Scripts
 
         private void Update()
         {
-            if (_elapsedTime >= LevelSettings.SpawnSpeed)
+            if (_elapsedTime >= 1f / LevelSettings.SpawnSpeed)
             {
-                _elapsedTime -= LevelSettings.SpawnSpeed;
+                _elapsedTime -= 1f / LevelSettings.SpawnSpeed;
 
                 var banditIndex = GetRandomBandit();
                 var bandit = _pools[banditIndex].Spawn();

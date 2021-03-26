@@ -1,19 +1,20 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace RealMenGame.Scripts.Bandits
 {
     public class BanditController : MonoBehaviour
     {
-        [SerializeField]
-        private NavMeshAgent _navMeshAgent;
-
-        private Transform _target;
-        [SerializeField]
-        public BanditState CurrentState;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private Animator _animator;
+        [SerializeField] public BanditState CurrentState;
 
         public int BanditIndex;
+
+        private static readonly int IsKebabRightHash = Animator.StringToHash("IsKebabRight");
+        private static readonly int KebabCaughtHash = Animator.StringToHash("KebabCatched");
 
         public enum BanditState
         {
@@ -22,6 +23,16 @@ namespace RealMenGame.Scripts.Bandits
             ReachedStall,
             MovingAway,
             Done
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //var kebab = other.GetComponent<Shaurma>();
+            //TODO: Проверить, правильная ли шаурма
+            var isKebabRight = Random.Range(0, 1) == 1;
+
+            _animator.SetBool(IsKebabRightHash, isKebabRight);
+            _animator.SetTrigger(KebabCaughtHash);
         }
 
         private bool IsDestinationReached
@@ -61,12 +72,10 @@ namespace RealMenGame.Scripts.Bandits
 
         private void ProcessSpawned()
         {
-            _target = LarekManager.Instance.transform;
-
             CurrentState = BanditState.MovingToStall;
 
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_target.position);
+            _navMeshAgent.SetDestination(StallManager.Instance.GetRandomTarget().position);
         }
 
         private void ProcessMovingToStall()

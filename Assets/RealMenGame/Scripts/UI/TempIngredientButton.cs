@@ -17,7 +17,7 @@ namespace RealMenGame.Scripts.UI
 
         public void OnClick()
         {
-            LarekManager.Instance.SetIngredient(ingredientType, ingredient);
+            StallManager.Instance.SetIngredient(ingredientType, ingredient);
         }
     }
 }

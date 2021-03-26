@@ -19,7 +19,7 @@ namespace RealMenGame.Scripts
                 var ray = _camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var hit) && hit.collider.gameObject.layer != 5)
                 {
-                    LarekManager.Instance.OnShoot(hit.point);
+                    StallManager.Instance.OnShoot(hit.point);
                 }
             }
         }

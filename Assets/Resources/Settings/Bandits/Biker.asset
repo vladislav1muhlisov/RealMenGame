@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e460297390834fa38d6a59a0f919e236, type: 3}
-  m_Name: LevelSettings
+  m_Script: {fileID: 11500000, guid: 4a9036da79454e96938f136579fedc4d, type: 3}
+  m_Name: Biker
   m_EditorClassIdentifier: 
-  PossibleBandits:
-  - {fileID: 11400000, guid: cdcffc54ffad0f8448d16cbe831774ed, type: 2}
-  SpawnChances:
-  - 1
-  SpawnSpeed: 0.5
+  Prefab: {fileID: 5142454544840464237, guid: 3e81b04b8abee794fa08e66f2bbe82b2, type: 3}

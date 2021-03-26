@@ -1,18 +1,18 @@
-using Cysharp.Threading.Tasks;
 using RealMenGame.Scripts.Common;
 using UniRx;
 using UnityEngine;
 
 namespace RealMenGame.Scripts
 {
-    public class LarekManager : MonoBehaviourSingleton<LarekManager>
+    public class StallManager : MonoBehaviourSingleton<StallManager>
     {
         [SerializeField] private Shaurma shaurma;
-        
-        public bool IsShooting { get; private set; }
+
+        [SerializeField] private Transform[] _targets;
+
+        public Transform GetRandomTarget() => _targets[Random.Range(0, _targets.Length)];
 
         public ReactiveProperty<int> Health = new ReactiveProperty<int>();
-
 
         public void SetDamage(int damage)
         {
@@ -21,15 +21,13 @@ namespace RealMenGame.Scripts
 
         public void OnShoot(Vector3 position)
         {
-            Shoot(position).Forget();
+            Shoot(position);
         }
 
-        private async UniTask Shoot(Vector3 position)
+        private void Shoot(Vector3 position)
         {
-            IsShooting = true;
-            await shaurma.FlyTo(position);
+            shaurma.FlyTo(position);
             shaurma.ResetShaurma();
-            IsShooting = false;
         }
 
         public void SetIngredient(IngredientType ingredientType, int number)

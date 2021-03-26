@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,10 +59,10 @@ namespace RealMenGame.Scripts
             }
         }
 
-        public async UniTask FlyTo(Vector3 position)
+        public void FlyTo(Vector3 position)
         {
             canvas.SetActive(false);
-            await transform.DOMove(position, 0.2f).AsyncWaitForCompletion();
+            transform.DOMove(position, 0.2f);
         }
 
         public void ResetShaurma()
@@ -72,6 +71,7 @@ namespace RealMenGame.Scripts
             SetIngredient(IngredientType.Meat, -1);
             SetIngredient(IngredientType.Vegetables, -1);
             SetIngredient(IngredientType.Sauce, -1);
+            
             transform.localPosition = Vector3.zero;
             canvas.SetActive(true);
         }
