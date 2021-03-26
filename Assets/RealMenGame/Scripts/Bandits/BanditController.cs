@@ -11,9 +11,11 @@ namespace RealMenGame.Scripts.Bandits
 
         private Transform _target;
         [SerializeField]
-        private BanditState _currentState;
+        public BanditState CurrentState;
 
-        private enum BanditState
+        public int BanditIndex;
+
+        public enum BanditState
         {
             Spawned,
             MovingToStall,
@@ -35,7 +37,7 @@ namespace RealMenGame.Scripts.Bandits
 
         private void Update()
         {
-            switch (_currentState)
+            switch (CurrentState)
             {
                 case BanditState.Spawned:
                     ProcessSpawned();
@@ -44,12 +46,13 @@ namespace RealMenGame.Scripts.Bandits
                     ProcessMovingAway();
                     break;
                 case BanditState.ReachedStall:
-                    _currentState = BanditState.MovingAway;
+                    CurrentState = BanditState.MovingAway;
                     break;
                 case BanditState.MovingToStall:
                     ProcessMovingToStall();
                     break;
                 case BanditState.Done:
+                    SpawnManager.Instance.DeSpawnBandit(this);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -60,7 +63,7 @@ namespace RealMenGame.Scripts.Bandits
         {
             _target = LarekManager.Instance.transform;
 
-            _currentState = BanditState.MovingToStall;
+            CurrentState = BanditState.MovingToStall;
             
             _navMeshAgent.SetDestination(_target.position);
         }
@@ -69,9 +72,9 @@ namespace RealMenGame.Scripts.Bandits
         {
             if (IsDestinationReached == false) return;
             
-            _currentState = BanditState.ReachedStall;
+            CurrentState = BanditState.ReachedStall;
                 
-            var awayPoint = SpawnPointsManager.Instance.GetRandomAwayPoint();
+            var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
 
             _navMeshAgent.SetDestination(awayPoint.position);
         }
@@ -80,7 +83,7 @@ namespace RealMenGame.Scripts.Bandits
         {
             if (IsDestinationReached == false) return;
 
-            _currentState = BanditState.Done;
+            CurrentState = BanditState.Done;
             _navMeshAgent.enabled = false;
         }
 
