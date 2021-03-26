@@ -18,7 +18,7 @@ namespace RealMenGame.Scripts
 
         public async UniTask FlyTo(Transform target)
         {
-            await transform.DOMove(target.position, 1f).AsyncWaitForCompletion();
+            await transform.DOMove(target.position, 0.2f).AsyncWaitForCompletion();
         }
 
         public void ResetShaurma()
