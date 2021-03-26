@@ -7,5 +7,6 @@ namespace RealMenGame.Scripts.Settings
     public class BanditSettings : ScriptableObject
     {
         public BanditController Prefab;
+        public int Damage;
     }
 }

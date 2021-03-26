@@ -1269,6 +1269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4251381755557308359}
   - component: {fileID: 1353665381806498234}
+  - component: {fileID: 159235384697418196}
   m_Layer: 5
   m_Name: panel_right
   m_TagString: Untagged
@@ -1305,6 +1306,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8655734500367967736}
   m_CullTransparentMesh: 1
+--- !u!114 &159235384697418196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655734500367967736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3349f6bfa0ee4dc181266d739a09410c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hearts:
+  - {fileID: 7790334405616437372}
+  - {fileID: 891889614892204774}
+  - {fileID: 7460001705536715171}
+  - {fileID: 6526578368867632548}
+  - {fileID: 9050404979911157549}
+  - {fileID: 7865512412618706885}
+  - {fileID: 8328410874799207086}
+  - {fileID: 9180807729383063996}
+  - {fileID: 8607500883565646262}
+  - {fileID: 8422977294767054670}
 --- !u!1 &9050404979911157549
 GameObject:
   m_ObjectHideFlags: 0

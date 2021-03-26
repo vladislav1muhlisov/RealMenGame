@@ -10,6 +10,7 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Animator _animator;
         [SerializeField] public BanditState CurrentState;
+        [SerializeField] private int _damage;
 
         public int BanditIndex;
 
@@ -57,6 +58,7 @@ namespace RealMenGame.Scripts.Bandits
                     ProcessMovingAway();
                     break;
                 case BanditState.ReachedStall:
+                    StallManager.Instance.SetDamage(_damage);
                     CurrentState = BanditState.MovingAway;
                     break;
                 case BanditState.MovingToStall:
