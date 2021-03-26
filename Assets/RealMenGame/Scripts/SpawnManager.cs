@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using RealMenGame.Scripts.Bandits;
 using RealMenGame.Scripts.Common;
 using RealMenGame.Scripts.Settings;
@@ -8,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace RealMenGame.Scripts
 {
-    public class SpawnManager : MonoBehaviourSingleton<SpawnManager>
+    public class SpawnManager : MonoBehaviourSceneSingleton<SpawnManager>
     {
         private const int POOL_SIZE = 10;
         

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RealMenGame.Scripts
 {
-    public class StallManager : MonoBehaviourSingleton<StallManager>
+    public class StallManager : MonoBehaviourSceneSingleton<StallManager>
     {
         [SerializeField] private Shaurma shaurma;
 
