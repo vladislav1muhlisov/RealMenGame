@@ -22,8 +22,9 @@ namespace RealMenGame.Scripts
                     var target = hit.collider.gameObject.GetComponent<BanditController>();
                     if (target != null)
                     {
-                        LarekManager.Instance.OnShoot(target.transform);
+                        // Послать шаурму бандиту
                     }
+                    LarekManager.Instance.OnShoot(hit.point);
                 }
             }
         }
