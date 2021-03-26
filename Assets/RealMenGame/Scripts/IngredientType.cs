@@ -4,7 +4,7 @@
     {
         Lavash,
         Vegetables,
-        Chicken,
+        Meat,
         Sauce
 
     }

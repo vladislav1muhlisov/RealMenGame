@@ -1,5 +1,5 @@
-﻿using RealMenGame.Scripts.Bandits;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace RealMenGame.Scripts
 {
@@ -14,16 +14,11 @@ namespace RealMenGame.Scripts
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject() == false)
             {
                 var ray = _camera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hit))
+                if (Physics.Raycast(ray, out var hit) && hit.collider.gameObject.layer != 5)
                 {
-                    var target = hit.collider.gameObject.GetComponent<BanditController>();
-                    if (target != null)
-                    {
-                        // Послать шаурму бандиту
-                    }
                     LarekManager.Instance.OnShoot(hit.point);
                 }
             }
