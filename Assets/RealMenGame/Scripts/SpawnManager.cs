@@ -89,6 +89,8 @@ namespace RealMenGame.Scripts
                 bandit.BanditIndex = banditIndex;
                 bandit.CurrentState = BanditController.BanditState.Spawned;
             }
+
+            _elapsedTime += Time.deltaTime;
         }
     }
 }

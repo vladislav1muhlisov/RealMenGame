@@ -64,7 +64,8 @@ namespace RealMenGame.Scripts.Bandits
             _target = LarekManager.Instance.transform;
 
             CurrentState = BanditState.MovingToStall;
-            
+
+            _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_target.position);
         }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RealMenGame.Scripts.Settings
 {
-    [CreateAssetMenu(fileName = "BanditSettings", menuName = "RM/BanditSettings", order = 0)]
+    [CreateAssetMenu(fileName = "BanditSettings", menuName = "RealMen/BanditSettings", order = 0)]
     public class BanditSettings : ScriptableObject
     {
         public BanditController Prefab;
