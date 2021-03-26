@@ -14,7 +14,10 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] public BanditState CurrentState;
         [SerializeField] private int _damage;
         [SerializeField] private ShaurmaDisplay _shaurmaDisplay;
-        [SerializeField] public KebabIngredients Ingredients;
+        [SerializeField] private KebabIngredients Ingredients;
+
+        public Transform[] WayPoints;
+        private int _currentWayPoint;
 
         public int BanditIndex;
 
@@ -24,6 +27,7 @@ namespace RealMenGame.Scripts.Bandits
         public enum BanditState
         {
             Spawned,
+            OnWay,
             MovingToStall,
             ReachedStall,
             MovingAway,
@@ -80,6 +84,9 @@ namespace RealMenGame.Scripts.Bandits
                 case BanditState.Spawned:
                     ProcessSpawned();
                     break;
+                case BanditState.OnWay:
+                    ProcessOnWay();
+                    break;
                 case BanditState.MovingAway:
                     ProcessMovingAway();
                     break;
@@ -102,10 +109,29 @@ namespace RealMenGame.Scripts.Bandits
             Ingredients.Ingredients = IngredientsRandomGeneratorUtil.Generate();
             _shaurmaDisplay.SetIngredients(Ingredients.Ingredients);
 
-            CurrentState = BanditState.MovingToStall;
+            CurrentState = BanditState.OnWay;
+
+            _currentWayPoint = 0;
 
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(StallManager.Instance.GetRandomTarget().position);
+            _navMeshAgent.SetDestination(WayPoints[_currentWayPoint].position);
+        }
+
+        private void ProcessOnWay()
+        {
+            if (IsDestinationReached == false) return;
+
+            ++_currentWayPoint;
+
+            if (_currentWayPoint >= WayPoints.Length)
+            {
+                CurrentState = BanditState.MovingToStall;
+                _navMeshAgent.SetDestination(StallManager.Instance.GetRandomTarget().position);
+
+                return;
+            }
+
+            _navMeshAgent.SetDestination(WayPoints[_currentWayPoint].position);
         }
 
         private void ProcessMovingToStall()

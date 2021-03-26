@@ -14,13 +14,13 @@ namespace RealMenGame.Scripts
         
         public LevelSettings LevelSettings;
         
-        public Transform[] SpawnPoints;
+        public SpawnPoint[] SpawnPoints;
         public Transform[] AwayPoints;
 
         private double _elapsedTime;
         private BanditPool[] _pools;
 
-        private Transform GetRandomSpawnPoint()
+        private SpawnPoint GetRandomSpawnPoint()
         {
             return SpawnPoints[Random.Range(0, SpawnPoints.Length)];
         }
@@ -85,21 +85,16 @@ namespace RealMenGame.Scripts
                 var banditIndex = GetRandomBandit();
                 var bandit = _pools[banditIndex].Spawn();
 
-                bandit.transform.position = GetRandomSpawnPoint().position;
+                var spawnPoint = GetRandomSpawnPoint();
+                
+                bandit.transform.position = spawnPoint.transform.position;
+                bandit.WayPoints = spawnPoint.GetRandomWay().WayPoints;
+                
                 bandit.gameObject.SetActive(true);
                 bandit.BanditIndex = banditIndex;
                 bandit.CurrentState = BanditController.BanditState.Spawned;
-                bandit.Ingredients.Ingredients = new Dictionary<IngredientType, Ingredient>();
                 
-                var lavash = IngredientsConfigLoader.Instance.IngredientsConfig.LavashSprites;
-                var meat = IngredientsConfigLoader.Instance.IngredientsConfig.MeatSprites;
-                var sauce = IngredientsConfigLoader.Instance.IngredientsConfig.SauceSprites;
-                var vegetables = IngredientsConfigLoader.Instance.IngredientsConfig.VegetablesSprites;
-
-                bandit.Ingredients.Ingredients[IngredientType.Lavash] = lavash[Random.Range(0, lavash.Count)];
-                bandit.Ingredients.Ingredients[IngredientType.Meat] = meat[Random.Range(0, meat.Count)];
-                bandit.Ingredients.Ingredients[IngredientType.Sauce] = sauce[Random.Range(0, sauce.Count)];
-                bandit.Ingredients.Ingredients[IngredientType.Vegetables] = vegetables[Random.Range(0, vegetables.Count)];
+                
             }
 
             _elapsedTime += Time.deltaTime;

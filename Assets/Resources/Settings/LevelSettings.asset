@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdcffc54ffad0f8448d16cbe831774ed, type: 2}
   SpawnChances:
   - 1
-  SpawnSpeed: 0.5
+  SpawnSpeed: 0.1
