@@ -2348,6 +2348,8 @@ GameObject:
   - component: {fileID: 1174389288363622513}
   - component: {fileID: 5142454544840464237}
   - component: {fileID: 690109501561703129}
+  - component: {fileID: -1074938298714987715}
+  - component: {fileID: 5584210981299017397}
   m_Layer: 0
   m_Name: biker_male
   m_TagString: Untagged
@@ -2435,6 +2437,7 @@ MonoBehaviour:
   _animator: {fileID: 1174389288363622513}
   CurrentState: 0
   _damage: 10
+  Ingredients: {fileID: -1074938298714987715}
   BanditIndex: 0
 --- !u!195 &690109501561703129
 NavMeshAgent:
@@ -2445,7 +2448,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1232370235579180379}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.27
+  m_Radius: 0.48
   m_Speed: 0.4
   m_Acceleration: 8
   avoidancePriority: 0
@@ -2458,6 +2461,32 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-1074938298714987715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232370235579180379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1047895c8bd840e89719dcc4888a5f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &5584210981299017397
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232370235579180379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.48
+  m_Height: 1.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1232385194457751381
 GameObject:
   m_ObjectHideFlags: 0

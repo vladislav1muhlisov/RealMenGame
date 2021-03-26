@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using DG.Tweening;
 using RealMenGame.Scripts.Common;
 using UniRx;
 using UnityEngine;
@@ -9,6 +11,11 @@ namespace RealMenGame.Scripts
         [SerializeField] private Shaurma shaurma;
 
         [SerializeField] private Transform[] _targets;
+        [SerializeField] private KebabProjectile _kebabProjectilePrefab;
+        [SerializeField] private Transform _kebabStartPosition;
+        [SerializeField] private float _kebabSpeed = 100f;
+
+        private const float DistanceToFly = 1000f;
 
         public Transform GetRandomTarget() => _targets[Random.Range(0, _targets.Length)];
 
@@ -23,12 +30,21 @@ namespace RealMenGame.Scripts
 
         public void OnShoot(Vector3 position)
         {
-            Shoot(position);
-        }
+            if (shaurma.Ingredients.Count != 4) return;
+            
+            var kebabPosition = _kebabStartPosition.position;
+            var kebabProjectile = Instantiate(_kebabProjectilePrefab, kebabPosition, Quaternion.identity);
 
-        private void Shoot(Vector3 position)
-        {
-            shaurma.FlyTo(position);
+            kebabProjectile.Ingredients.Ingredients = new Dictionary<IngredientType, Ingredient>(shaurma.Ingredients);
+
+            position = new Vector3(position.x, kebabPosition.y, position.z);
+
+            var dir = (position - kebabPosition).normalized;
+
+            kebabProjectile.TweenHandle = kebabProjectile.transform.DOMove(dir * DistanceToFly, DistanceToFly / _kebabSpeed)
+                .SetEase(Ease.Linear)
+                .OnComplete(() => Destroy(kebabProjectile.gameObject));
+            
             shaurma.ResetShaurma();
         }
 

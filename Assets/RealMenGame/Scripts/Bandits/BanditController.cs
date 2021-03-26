@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace RealMenGame.Scripts.Bandits
 {
@@ -11,6 +12,7 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] private Animator _animator;
         [SerializeField] public BanditState CurrentState;
         [SerializeField] private int _damage;
+        [SerializeField] public KebabIngredients Ingredients;
 
         public int BanditIndex;
 
@@ -28,12 +30,32 @@ namespace RealMenGame.Scripts.Bandits
 
         private void OnTriggerEnter(Collider other)
         {
-            //var kebab = other.GetComponent<Shaurma>();
-            //TODO: Проверить, правильная ли шаурма
-            var isKebabRight = Random.Range(0, 1) == 1;
+            var projectile = other.GetComponent<KebabProjectile>();
+            var kebabIngredients = projectile.Ingredients;
+            
+            if (CurrentState == BanditState.MovingToStall)
+            {
+                var theSame = Ingredients.Ingredients.Count != 0 && 
+                              kebabIngredients.Ingredients.Count != 0 &&
+                              Ingredients.Ingredients.All(ingredient => kebabIngredients.Ingredients[ingredient.Key] == ingredient.Value);
 
-            _animator.SetBool(IsKebabRightHash, isKebabRight);
-            _animator.SetTrigger(KebabCaughtHash);
+                _animator.SetBool(IsKebabRightHash, theSame);
+                _animator.SetTrigger(KebabCaughtHash);
+
+                if (theSame)
+                {
+                    CurrentState = BanditState.MovingAway;
+                    
+                    var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
+
+                    _navMeshAgent.SetDestination(awayPoint.position);
+                }
+            }
+            
+            projectile.TweenHandle.Kill();
+            other.enabled = false;
+            
+            Destroy(other.gameObject);
         }
 
         private bool IsDestinationReached

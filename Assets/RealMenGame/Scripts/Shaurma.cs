@@ -16,7 +16,6 @@ namespace RealMenGame.Scripts
 
         public Dictionary<IngredientType, Ingredient> Ingredients = new Dictionary<IngredientType, Ingredient>();
 
-
         private Dictionary<IngredientType, Image> _images;
 
         private Dictionary<IngredientType, Image> Images
@@ -55,12 +54,6 @@ namespace RealMenGame.Scripts
                 Images[ingredientType].gameObject.SetActive(true);
                 Images[ingredientType].sprite = ingredient.Sprite;
             }
-        }
-
-        public void FlyTo(Vector3 position)
-        {
-            canvas.SetActive(false);
-            transform.DOMove(position, 0.2f);
         }
 
         public void ResetShaurma()

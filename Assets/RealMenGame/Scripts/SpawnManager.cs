@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using RealMenGame.Scripts.Bandits;
 using RealMenGame.Scripts.Common;
 using RealMenGame.Scripts.Settings;
@@ -88,6 +89,17 @@ namespace RealMenGame.Scripts
                 bandit.gameObject.SetActive(true);
                 bandit.BanditIndex = banditIndex;
                 bandit.CurrentState = BanditController.BanditState.Spawned;
+                bandit.Ingredients.Ingredients = new Dictionary<IngredientType, Ingredient>();
+                
+                var lavash = IngredientsConfigLoader.Instance.IngredientsConfig.LavashSprites;
+                var meat = IngredientsConfigLoader.Instance.IngredientsConfig.MeatSprites;
+                var sauce = IngredientsConfigLoader.Instance.IngredientsConfig.SauceSprites;
+                var vegetables = IngredientsConfigLoader.Instance.IngredientsConfig.VegetablesSprites;
+
+                bandit.Ingredients.Ingredients[IngredientType.Lavash] = lavash[Random.Range(0, lavash.Count)];
+                bandit.Ingredients.Ingredients[IngredientType.Meat] = meat[Random.Range(0, meat.Count)];
+                bandit.Ingredients.Ingredients[IngredientType.Sauce] = sauce[Random.Range(0, sauce.Count)];
+                bandit.Ingredients.Ingredients[IngredientType.Vegetables] = vegetables[Random.Range(0, vegetables.Count)];
             }
 
             _elapsedTime += Time.deltaTime;
