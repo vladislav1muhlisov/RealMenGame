@@ -52,6 +52,7 @@ namespace RealMenGame.Scripts.Bandits
                     var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
 
                     _navMeshAgent.SetDestination(awayPoint.position);
+                    _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
                 }
             }
 
@@ -83,7 +84,6 @@ namespace RealMenGame.Scripts.Bandits
                     ProcessMovingAway();
                     break;
                 case BanditState.ReachedStall:
-                    StallManager.Instance.SetDamage(_damage);
                     CurrentState = BanditState.MovingAway;
                     break;
                 case BanditState.MovingToStall:
@@ -113,9 +113,12 @@ namespace RealMenGame.Scripts.Bandits
             if (IsDestinationReached == false) return;
 
             CurrentState = BanditState.ReachedStall;
+            
+            StallManager.Instance.SetDamage(_damage);
 
             var awayPoint = SpawnManager.Instance.GetRandomAwayPoint();
-
+            
+            _navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
             _navMeshAgent.SetDestination(awayPoint.position);
         }
 
