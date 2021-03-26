@@ -502,6 +502,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2366456563426662042, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: _kebabSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5979346640073506152, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
       propertyPath: m_Name
       value: GameLevel
@@ -549,6 +553,34 @@ PrefabInstance:
     - target: {fileID: 6713888521407605499, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407470425479841512, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424674260155162625, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424674260155162625, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424674260223930459, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424674260223930459, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424674260439905626, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 7424674260439905626, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efd38d4f1ef9fe44fa176a5e46208589, type: 3}
