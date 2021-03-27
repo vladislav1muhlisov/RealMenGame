@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace RealMenGame.Scripts.MainMenu
 {
     public class RecordsPanel : MonoBehaviour
     {
         [SerializeField] private ScoreLine[] scores;
+        [SerializeField] private NameInputPanel inputPanel;
         private readonly StatisticsManager _statisticsManager = new StatisticsManager();
 
         private void Awake()
@@ -14,8 +16,14 @@ namespace RealMenGame.Scripts.MainMenu
             var scoreValue = GameManager.Instance.Score.Value;
             if (scoreValue > 0)
             {
-                AddRecord(new ScoreData(scoreValue, "User"));
+                AddNewRecord(scoreValue).Forget();
             }
+        }
+
+        private async UniTask AddNewRecord(int score)
+        {
+            var yourName = await inputPanel.GetName();
+            AddRecord(new ScoreData(score, yourName));
         }
 
         private void LoadAllScore()
