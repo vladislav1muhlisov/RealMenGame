@@ -25,7 +25,7 @@ namespace RealMenGame.Scripts.Bandits
 
         public BanditSettings Settings;
 
-        public Transform[] WayPoints;
+        public Vector3[] WayPoints;
         private int _currentWayPoint;
 
         public int BanditIndex;
@@ -45,6 +45,8 @@ namespace RealMenGame.Scripts.Bandits
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("TRIGGER");
+            
             var projectile = other.GetComponent<KebabProjectile>();
             var kebabIngredients = projectile.Ingredients;
 
@@ -153,7 +155,7 @@ namespace RealMenGame.Scripts.Bandits
 
             _navMeshAgent.enabled = true;
             _navMeshAgent.speed = Settings.NormalSpeed;
-            _navMeshAgent.SetDestination(WayPoints[_currentWayPoint].position);
+            _navMeshAgent.SetDestination(WayPoints[_currentWayPoint]);
         }
 
         private void ProcessOnWay()
@@ -170,7 +172,7 @@ namespace RealMenGame.Scripts.Bandits
                 return;
             }
 
-            _navMeshAgent.SetDestination(WayPoints[_currentWayPoint].position);
+            _navMeshAgent.SetDestination(WayPoints[_currentWayPoint]);
         }
 
         private void ProcessMovingToStall()
