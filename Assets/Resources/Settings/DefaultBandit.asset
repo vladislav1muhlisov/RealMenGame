@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: DefaultBandit
   m_EditorClassIdentifier: 
   Prefab: {fileID: 6314306108842119837, guid: f1a8f73814622cb418fe35ad1c03e855, type: 3}
+  Damage: 10
+  Score: 100
+  AnimationRightDelay: 3.5
+  AnimationWrongDelay: 6.333
+  AwaySpeed: 0
+  NormalSpeed: 0

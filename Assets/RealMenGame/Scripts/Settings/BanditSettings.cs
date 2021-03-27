@@ -7,7 +7,8 @@ namespace RealMenGame.Scripts.Settings
     public class BanditSettings : ScriptableObject
     {
         public BanditController Prefab;
-        public int Damage;
+        public int Damage = 10;
+        public int Score = 10;
         
         public float AnimationRightDelay = 3.5f;
         public float AnimationWrongDelay = 6.333f;

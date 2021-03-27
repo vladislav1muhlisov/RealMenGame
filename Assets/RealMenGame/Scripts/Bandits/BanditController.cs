@@ -16,8 +16,6 @@ namespace RealMenGame.Scripts.Bandits
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Animator _animator;
         [SerializeField] public BanditState CurrentState;
-        [SerializeField] private int _damage;
-        [SerializeField] private int _score = 100;
         [SerializeField] private ShaurmaDisplay _shaurmaDisplay;
         [SerializeField] private KebabIngredients Ingredients;
 
@@ -60,7 +58,7 @@ namespace RealMenGame.Scripts.Bandits
 
                 if (theSame)
                 {
-                    projectile.RaiseOnSuccess(_score);
+                    projectile.RaiseOnSuccess(Settings.Score);
                 }
 
                 _animator.SetBool(IsKebabRightHash, theSame);
@@ -181,7 +179,7 @@ namespace RealMenGame.Scripts.Bandits
 
             CurrentState = BanditState.ReachedStall;
 
-            GameManager.Instance.SetDamage(_damage);
+            GameManager.Instance.SetDamage(Settings.Damage);
             _shaurmaDisplay.gameObject.SetActive(false);
 
             Mood.gameObject.SetActive(true);
