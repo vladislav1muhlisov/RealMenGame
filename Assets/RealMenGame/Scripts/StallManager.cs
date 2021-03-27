@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using RealMenGame.Scripts.Common;
+using RealMenGame.Scripts.Sounds;
 using UnityEngine;
 
 namespace RealMenGame.Scripts
@@ -13,6 +14,7 @@ namespace RealMenGame.Scripts
         [SerializeField] private KebabProjectile _kebabProjectilePrefab;
         [SerializeField] private Transform _kebabStartPosition;
         [SerializeField] private float _kebabSpeed = 100f;
+        [SerializeField] private AudioClipSettings _cashSound;
 
         private const float DistanceToFly = 100f;
 
@@ -40,6 +42,7 @@ namespace RealMenGame.Scripts
         {
             projectile.OnSuccess -= OnSuccess;
             GameManager.Instance.Score.Value += score;
+            UISound.Instance.Play(_cashSound);
         }
 
         public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)
