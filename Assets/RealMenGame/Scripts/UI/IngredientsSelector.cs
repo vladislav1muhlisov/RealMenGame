@@ -18,6 +18,7 @@ namespace RealMenGame.Scripts.UI
         [SerializeField] private Button fakeButton;
         [SerializeField] private Image fakeButtonImage;
         [SerializeField] private AudioClipSettings rotationSound;
+        [SerializeField] private Sprite emptySprite;
         private List<Ingredient> _ingredients;
         private bool _isRotating;
 
@@ -129,15 +130,7 @@ namespace RealMenGame.Scripts.UI
             {
                 Ingredient ingredient = _ingredients[(_currentLowSlotIngredientIndex + i) % _ingredients.Count];
                 _ingredientsSlots[i] = ingredient;
-                if (ingredient != null)
-                {
-                    slots[i].gameObject.SetActive(true);
-                    slots[i].sprite = ingredient.Sprite;
-                }
-                else
-                {
-                    slots[i].gameObject.SetActive(false);
-                }
+                slots[i].sprite = ingredient != null ? ingredient.Sprite : emptySprite;
             }
 
             var selectedIngredient = _ingredientsSlots[1];
@@ -229,15 +222,7 @@ namespace RealMenGame.Scripts.UI
             int indexForUpperNextImage = (_currentLowSlotIngredientIndex + 3 - delta) % _ingredients.Count;
 
             var ingredient = delta > 0 ? _ingredients[indexForUpperNextImage] : _ingredients[indexForLowNextSprite];
-            if (ingredient == null)
-            {
-                fakeButtonImage.gameObject.SetActive(false);
-            }
-            else
-            {
-                fakeButtonImage.gameObject.SetActive(true);
-                fakeButtonImage.sprite = ingredient.Sprite;
-            }
+            fakeButtonImage.sprite = ingredient != null ? ingredient.Sprite : emptySprite;
         }
 
 
