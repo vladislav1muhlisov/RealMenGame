@@ -17,7 +17,7 @@ namespace RealMenGame.Scripts
 
         [SerializeField] private CanvasGroup _fullScreenFade;
         [SerializeField] private LevelsSettings _levelsSettings;
-        private LevelSettings _currentLevel;
+        public  LevelSettings _currentLevel;
         private int _currentLevelIndex;
 
         public int MaxHealth => _currentLevel.MaxHealth;

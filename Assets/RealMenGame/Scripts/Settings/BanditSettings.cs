@@ -13,7 +13,7 @@ namespace RealMenGame.Scripts.Settings
         public float AnimationRightDelay = 3.5f;
         public float AnimationWrongDelay = 6.333f;
 
-        public float AwaySpeed;
-        public float NormalSpeed;
+        public float AwaySpeed = 0.8f;
+        public float NormalSpeed = 0.4f;
     }
 }

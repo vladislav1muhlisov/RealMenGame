@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   PossibleBandits:
-  - {fileID: 11400000, guid: cdcffc54ffad0f8448d16cbe831774ed, type: 2}
+  - {fileID: 11400000, guid: 6574e00a49a258640aaacf13be609fba, type: 2}
   SpawnChances:
   - 1
   SpawnSpeed: 0.1

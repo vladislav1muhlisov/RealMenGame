@@ -11,9 +11,9 @@ namespace RealMenGame.Scripts
         private const int POOL_SIZE = 10;
 
         public Transform Ground;
-        
-        public LevelSettings LevelSettings;
-        
+
+        public LevelSettings LevelSettings => GameManager.Instance._currentLevel;
+
         public SpawnPoint[] SpawnPoints;
         public Transform[] AwayPoints;
 
@@ -33,14 +33,14 @@ namespace RealMenGame.Scripts
         public void DeSpawnBandit(BanditController bandit)
         {
             bandit.gameObject.SetActive(false);
-            
+
             _pools[bandit.BanditIndex].DeSpawn(bandit);
         }
 
         protected override void OnSingletonAwake()
         {
             _elapsedTime = 0f;
-            
+
             InitializePools();
 
             base.OnSingletonAwake();
@@ -52,7 +52,8 @@ namespace RealMenGame.Scripts
 
             for (var banditTypeIndex = 0; banditTypeIndex < _pools.Length; ++banditTypeIndex)
             {
-                _pools[banditTypeIndex] = new BanditPool(LevelSettings.PossibleBandits[banditTypeIndex].Prefab, POOL_SIZE);
+                _pools[banditTypeIndex] =
+                    new BanditPool(LevelSettings.PossibleBandits[banditTypeIndex].Prefab, POOL_SIZE);
             }
         }
 
@@ -65,8 +66,8 @@ namespace RealMenGame.Scripts
 
             for (var i = 0; i < LevelSettings.SpawnChances.Length; ++i)
             {
-                var max = min + LevelSettings.SpawnChances[i];
                 min += LevelSettings.SpawnChances[i];
+                var max = min + LevelSettings.SpawnChances[i];
 
                 if (value < min || value > max) continue;
 
@@ -94,9 +95,9 @@ namespace RealMenGame.Scripts
 
                 bandit.Settings = LevelSettings.PossibleBandits[banditIndex];
                 bandit.transform.position = PlaceOnGround(spawnPoint.transform.position);
-                
+
                 bandit.WayPoints = spawnPoint.GetRandomWay().WayPoints.Select(p => PlaceOnGround(p.position)).ToArray();
-                
+
                 bandit.gameObject.SetActive(true);
                 bandit.BanditIndex = banditIndex;
                 bandit.CurrentState = BanditController.BanditState.Spawned;

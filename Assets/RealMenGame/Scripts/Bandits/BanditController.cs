@@ -105,9 +105,10 @@ namespace RealMenGame.Scripts.Bandits
                     Observable.Timer(delay).Subscribe(_ =>
                     {
                         _navMeshAgent.enabled = true;
-                        
-                        _navMeshAgent.SetDestination(CurrentState == BanditState.OnWay ?
-                            WayPoints[_currentWayPoint] : StallManager.Instance.GetRandomTarget().position);
+
+                        _navMeshAgent.SetDestination(CurrentState == BanditState.OnWay
+                            ? WayPoints[_currentWayPoint]
+                            : StallManager.Instance.GetRandomTarget().position);
                     });
                 }
             }
@@ -225,6 +226,29 @@ namespace RealMenGame.Scripts.Bandits
             if (_navMeshAgent == null)
             {
                 _navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
+            }
+        }
+
+        private void Reset()
+        {
+            if (_animator == null)
+            {
+                _animator = GetComponent<Animator>();
+            }
+
+            if (_shaurmaDisplay == null)
+            {
+                _shaurmaDisplay = GetComponentInChildren<ShaurmaDisplay>(true);
+            }
+
+            if (Mood == null)
+            {
+                Mood = GetComponentInChildren<Mood>(true);
+            }
+
+            if (Ingredients == null)
+            {
+                Ingredients = GetComponent<KebabIngredients>();
             }
         }
     }
