@@ -1,4 +1,5 @@
-﻿using RealMenGame.Scripts.Common;
+﻿using System;
+using RealMenGame.Scripts.Common;
 using UniRx;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +7,8 @@ namespace RealMenGame.Scripts
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
-        public ReactiveProperty<int> Score = new ReactiveProperty<int>();
-        public ReactiveProperty<int> Health = new ReactiveProperty<int>(MaxHealth);
+        [NonSerialized] public ReactiveProperty<int> Score = new ReactiveProperty<int>(0);
+        [NonSerialized] public ReactiveProperty<int> Health = new ReactiveProperty<int>(MaxHealth);
         public const int MaxHealth = 100;
 
         public void SetDamage(int damage)

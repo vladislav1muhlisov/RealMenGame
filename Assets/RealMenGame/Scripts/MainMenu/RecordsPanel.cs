@@ -11,6 +11,11 @@ namespace RealMenGame.Scripts.MainMenu
         {
             _statisticsManager.Initialize();
             LoadAllScore();
+            var scoreValue = GameManager.Instance.Score.Value;
+            if (scoreValue > 0)
+            {
+                AddRecord(new ScoreData(scoreValue, "User"));
+            }
         }
 
         private void LoadAllScore()
