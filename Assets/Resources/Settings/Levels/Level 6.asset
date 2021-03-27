@@ -33,5 +33,5 @@ MonoBehaviour:
   - 5
   - 1
   SpawnSpeed: 0.5
-  NextLevelScore: 2500
+  NextLevelScore: 5000
   MaxHealth: 100
