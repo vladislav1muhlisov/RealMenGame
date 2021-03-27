@@ -66,6 +66,9 @@ MonoBehaviour:
   - {fileID: 7738309548627534037}
   fakeButton: {fileID: 8880142905491637586}
   fakeButtonImage: {fileID: 8672689236905384550}
+  rotationSound:
+    AudioClip: {fileID: 8300000, guid: cc1f5d213e9654c4092be9f39324db04, type: 3}
+    Volume: 1
 --- !u!114 &2181149608099442045
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,6 +22,15 @@ namespace RealMenGame.Scripts
 
         public int MaxHealth => _currentLevel.MaxHealth;
 
+        protected override void OnSingletonAwake()
+        {
+            base.OnSingletonAwake();
+            if (SceneManager.GetActiveScene().name == "Shaurmyachnaya")
+            {
+                NewGame();
+            }
+        }
+
         public void SetDamage(int damage)
         {
             Health.Value -= damage;
@@ -34,7 +43,8 @@ namespace RealMenGame.Scripts
 
         private void NextLevel()
         {
-            CrossFadeToScene("Shaurmyachnaya", () => SetLevel((_currentLevelIndex + 1) % _levelsSettings.Levels.Length)).Forget();
+            CrossFadeToScene("Shaurmyachnaya", () => SetLevel((_currentLevelIndex + 1) % _levelsSettings.Levels.Length))
+                .Forget();
         }
 
         private void GameOver()
@@ -49,7 +59,7 @@ namespace RealMenGame.Scripts
 
             Score.Value = 0;
             Health.Value = _currentLevel.MaxHealth;
-                
+
             Score.Where(v => v >= _currentLevel.NextLevelScore).Take(1).Subscribe(_ => NextLevel());
             Health.Where(v => v <= 0).Take(1).Subscribe(_ => GameOver());
         }

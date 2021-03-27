@@ -2,6 +2,7 @@
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using RealMenGame.Scripts.Sounds;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ namespace RealMenGame.Scripts.UI
         [SerializeField] private List<Button> buttons;
         [SerializeField] private Button fakeButton;
         [SerializeField] private Image fakeButtonImage;
+        [SerializeField] private AudioClipSettings rotationSound;
         private List<Ingredient> _ingredients;
         private bool _isRotating;
 
@@ -139,6 +141,8 @@ namespace RealMenGame.Scripts.UI
 
         private async UniTask RotateAsync(int delta)
         {
+            UISound.Instance.Play(rotationSound);
+
             var centralPosition = buttons[1].transform.localPosition;
             var deltaPosition = buttons[0].transform.localPosition - centralPosition;
             var deltaPositionSigned = deltaPosition * delta;
