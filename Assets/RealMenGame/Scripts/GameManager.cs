@@ -17,7 +17,7 @@ namespace RealMenGame.Scripts
 
         [SerializeField] private CanvasGroup _fullScreenFade;
         [SerializeField] private LevelsSettings _levelsSettings;
-        public  LevelSettings _currentLevel;
+        public LevelSettings _currentLevel;
         private int _currentLevelIndex;
 
         public int MaxHealth => _currentLevel.MaxHealth;
@@ -38,12 +38,14 @@ namespace RealMenGame.Scripts
 
         public void NewGame()
         {
-            CrossFadeToScene("Shaurmyachnaya", () => SetLevel(0)).Forget();
+            Score.Value = 0;
+            CrossFadeToScene("Shaurmyachnaya", () => SetLevel(0), () => OnNewLevelSet?.Invoke(0)).Forget();
         }
 
         private void NextLevel()
         {
-            CrossFadeToScene("Shaurmyachnaya", () => SetLevel((_currentLevelIndex + 1) % _levelsSettings.Levels.Length))
+            CrossFadeToScene("Shaurmyachnaya", () => SetLevel((_currentLevelIndex + 1) % _levelsSettings.Levels.Length),
+                    () => OnNewLevelSet?.Invoke(_currentLevelIndex))
                 .Forget();
         }
 
@@ -57,15 +59,13 @@ namespace RealMenGame.Scripts
             _currentLevelIndex = index;
             _currentLevel = _levelsSettings.Levels[_currentLevelIndex];
 
-            Score.Value = 0;
             Health.Value = _currentLevel.MaxHealth;
 
             Score.Where(v => v >= _currentLevel.NextLevelScore).Take(1).Subscribe(_ => NextLevel());
             Health.Where(v => v <= 0).Take(1).Subscribe(_ => GameOver());
-            OnNewLevelSet?.Invoke(index);
         }
 
-        private async UniTask CrossFadeToScene(string sceneName, Action action = null)
+        private async UniTask CrossFadeToScene(string sceneName, Action action = null, Action postAction = null)
         {
             await _fullScreenFade.DOFade(1f, 0.4f);
 
@@ -73,6 +73,8 @@ namespace RealMenGame.Scripts
 
             await SceneManager.LoadSceneAsync(sceneName);
             await _fullScreenFade.DOFade(0f, 0.4f);
+
+            postAction?.Invoke();
         }
     }
 }
