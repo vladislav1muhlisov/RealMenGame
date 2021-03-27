@@ -21,7 +21,7 @@ namespace RealMenGame.Scripts.UI
 
         private void OnHealthChanged(int health)
         {
-            var heartsToActivate = Mathf.CeilToInt((float) health * _hearts.Length / GameManager.MaxHealth);
+            var heartsToActivate = Mathf.CeilToInt((float) health * _hearts.Length / GameManager.Instance.MaxHealth);
             for (int i = 0; i < _hearts.Length; i++)
             {
                 _hearts[i].SetActive(heartsToActivate > i);
