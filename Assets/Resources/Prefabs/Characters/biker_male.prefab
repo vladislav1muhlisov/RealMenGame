@@ -2462,7 +2462,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 0
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2518,7 +2518,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 16821b2f6f2dc1b47b8942a19f57dd92, type: 3}
   _satisfiedSounds: []
   _angerSounds: []
-  _eatTrigger: {fileID: 5524757034172292522, guid: f8974426f5e7fc341ae4f18f98e1a87c, type: 2}
 --- !u!82 &-3298327344954126495
 AudioSource:
   m_ObjectHideFlags: 0
