@@ -1,6 +1,9 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using RealMenGame.Scripts.Common;
 using UniRx;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace RealMenGame.Scripts
@@ -9,6 +12,9 @@ namespace RealMenGame.Scripts
     {
         [NonSerialized] public ReactiveProperty<int> Score = new ReactiveProperty<int>(0);
         [NonSerialized] public ReactiveProperty<int> Health = new ReactiveProperty<int>(MaxHealth);
+
+        [SerializeField] private CanvasGroup _fullScreenFade;
+        
         public const int MaxHealth = 100;
 
         public void SetDamage(int damage)
@@ -20,11 +26,15 @@ namespace RealMenGame.Scripts
             }
         }
 
-        public void NewGame()
+        public async void NewGame()
         {
+            await _fullScreenFade.DOFade(1f, 0.4f);
+            
             Score.Value = 0;
             Health.Value = MaxHealth;
-            SceneManager.LoadScene("Shaurmyachnaya");
+            
+            await SceneManager.LoadSceneAsync("Shaurmyachnaya");
+            await _fullScreenFade.DOFade(0f, 0.4f);
         }
     }
 }
