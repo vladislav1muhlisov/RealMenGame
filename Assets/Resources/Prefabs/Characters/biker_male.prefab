@@ -2440,7 +2440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 690109501561703129}
   _animator: {fileID: 1174389288363622513}
-  CurrentState: 0
   _shaurmaDisplay: {fileID: 2717250416256934474}
   Ingredients: {fileID: -1074938298714987715}
   Mood: {fileID: 329615355577554624}
@@ -2528,10 +2527,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b5f2c032d17a1f14fada6f48981f913c, type: 3}
   - {fileID: 8300000, guid: 3948166341820eb44884b30b78e99b7a, type: 3}
   _angerSounds:
-  - {fileID: 8300000, guid: eff745579bd1f454497d9e8d13358437, type: 3}
+  - {fileID: 8300000, guid: 7a138af3a5723de4cb61e9e4b902ccff, type: 3}
   - {fileID: 8300000, guid: 658a7ebea8b0f81468f78b45f53ea809, type: 3}
   - {fileID: 8300000, guid: 156e404693b15514da8958473e0cf8b2, type: 3}
-  - {fileID: 8300000, guid: 0cb5c44f5ad8ef3479ade55ecdfe55e7, type: 3}
 --- !u!82 &-3298327344954126495
 AudioSource:
   m_ObjectHideFlags: 0
