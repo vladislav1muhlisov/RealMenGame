@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/RealMenGame/Scenes/ShaurmaNewGame.unity
+    path: Assets/RealMenGame/Scenes/ShaurmaGameOver.unity
     guid: 1c02fb6c67afa7640b63cf084d3e4f3e
   - enabled: 1
     path: Assets/RealMenGame/Scenes/Shaurmyachnaya.unity
