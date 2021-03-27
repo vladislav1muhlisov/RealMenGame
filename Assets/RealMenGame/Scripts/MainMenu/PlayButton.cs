@@ -1,6 +1,5 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace RealMenGame.Scripts.MainMenu
 {
@@ -9,7 +8,7 @@ namespace RealMenGame.Scripts.MainMenu
         [UsedImplicitly]
         public void OnClick()
         {
-            SceneManager.LoadScene("Shaurmyachnaya");
+            GameManager.Instance.NewGame();
         }
     }
 }

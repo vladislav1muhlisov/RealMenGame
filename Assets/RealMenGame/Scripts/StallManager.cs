@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using RealMenGame.Scripts.Common;
-using UniRx;
 using UnityEngine;
 
 namespace RealMenGame.Scripts
@@ -18,15 +17,6 @@ namespace RealMenGame.Scripts
         private const float DistanceToFly = 1000f;
 
         public Transform GetRandomTarget() => _targets[Random.Range(0, _targets.Length)];
-
-        public ReactiveProperty<int> Health = new ReactiveProperty<int>(MaxHealth);
-        public ReactiveProperty<int> Score = new ReactiveProperty<int>();
-        public const int MaxHealth = 100;
-
-        public void SetDamage(int damage)
-        {
-            Health.Value -= damage;
-        }
 
         public void OnShoot(Vector3 position)
         {
@@ -49,7 +39,7 @@ namespace RealMenGame.Scripts
         private void OnSuccess(KebabProjectile projectile, int score)
         {
             projectile.OnSuccess -= OnSuccess;
-            Score.Value += score;
+            GameManager.Instance.Score.Value += score;
         }
 
         public void SetIngredient(IngredientType ingredientType, Ingredient ingredient)

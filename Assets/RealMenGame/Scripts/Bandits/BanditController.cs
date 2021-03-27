@@ -46,7 +46,7 @@ namespace RealMenGame.Scripts.Bandits
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log("TRIGGER");
-            
+
             var projectile = other.GetComponent<KebabProjectile>();
             var kebabIngredients = projectile.Ingredients;
 
@@ -181,7 +181,7 @@ namespace RealMenGame.Scripts.Bandits
 
             CurrentState = BanditState.ReachedStall;
 
-            StallManager.Instance.SetDamage(_damage);
+            GameManager.Instance.SetDamage(_damage);
             _shaurmaDisplay.gameObject.SetActive(false);
 
             Mood.gameObject.SetActive(true);

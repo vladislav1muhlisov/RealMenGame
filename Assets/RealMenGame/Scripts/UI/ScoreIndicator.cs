@@ -12,7 +12,7 @@ namespace RealMenGame.Scripts.UI
 
         private void Awake()
         {
-            StallManager.Instance.Score.Subscribe(OnScoreChanged).AddTo(_compositeDisposable);
+            GameManager.Instance.Score.Subscribe(OnScoreChanged).AddTo(_compositeDisposable);
         }
 
         private void OnDestroy()
