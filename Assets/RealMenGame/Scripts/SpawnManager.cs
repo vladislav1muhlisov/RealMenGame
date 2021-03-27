@@ -3,13 +3,14 @@ using RealMenGame.Scripts.Bandits;
 using RealMenGame.Scripts.Common;
 using RealMenGame.Scripts.Settings;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace RealMenGame.Scripts
 {
     public class SpawnManager : MonoBehaviourSceneSingleton<SpawnManager>
     {
         private const int POOL_SIZE = 10;
+
+        public Transform Ground;
         
         public LevelSettings LevelSettings;
         
@@ -75,6 +76,11 @@ namespace RealMenGame.Scripts
             return 0;
         }
 
+        private Vector3 PlaceOnGround(Vector3 position)
+        {
+            return new Vector3(position.x, Ground.position.y + 0.01f, position.z);
+        }
+
         private void Update()
         {
             if (_elapsedTime >= 1f / LevelSettings.SpawnSpeed)
@@ -87,14 +93,13 @@ namespace RealMenGame.Scripts
                 var spawnPoint = GetRandomSpawnPoint();
 
                 bandit.Settings = LevelSettings.PossibleBandits[banditIndex];
-                bandit.transform.position = spawnPoint.transform.position;
-                bandit.WayPoints = spawnPoint.GetRandomWay().WayPoints;
+                bandit.transform.position = PlaceOnGround(spawnPoint.transform.position);
+                
+                bandit.WayPoints = spawnPoint.GetRandomWay().WayPoints.Select(p => PlaceOnGround(p.position)).ToArray();
                 
                 bandit.gameObject.SetActive(true);
                 bandit.BanditIndex = banditIndex;
                 bandit.CurrentState = BanditController.BanditState.Spawned;
-                
-                
             }
 
             _elapsedTime += Time.deltaTime;
