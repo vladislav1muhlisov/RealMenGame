@@ -20,11 +20,19 @@ namespace RealMenGame.Scripts.MainMenu
 
         internal GameModeStatistics()
         {
-            _scoreTable = new List<ScoreData>(MAXCount);
-            for (int i = 0; i < MAXCount; i++)
+            _scoreTable = new List<ScoreData>
             {
-                _scoreTable.Add(new ScoreData(0, "-"));
-            }
+                new ScoreData(150000, "IndianCoder666"),
+                new ScoreData(150000, "UnRhyme"),
+                new ScoreData(150000, "Kurenchanin"),
+                new ScoreData(150000, "Warmerko"),
+                new ScoreData(150000, "Settora"),
+                new ScoreData(10000, "Louken"),
+                new ScoreData(5000, "MITRICH"),
+                new ScoreData(2500, "Fox"),
+                new ScoreData(1000, "Wolf"),
+                new ScoreData(500, "Вася")
+            };
         }
 
         internal bool TryToAddNewRecord(ScoreData scoreData, out int index)
