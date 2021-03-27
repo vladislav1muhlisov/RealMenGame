@@ -15,9 +15,24 @@ namespace RealMenGame.Scripts.Bandits
     {
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Animator _animator;
-        [SerializeField] public BanditState CurrentState;
         [SerializeField] private ShaurmaDisplay _shaurmaDisplay;
         [SerializeField] private KebabIngredients Ingredients;
+
+        private BanditState _currentState;
+
+        public BanditState CurrentState
+        {
+            get => _currentState;
+            set
+            {
+                if (_currentState != value)
+                {
+                    Debug.Log($"CHANGE STATE from {_currentState} to {value}");
+                }
+
+                _currentState = value;
+            }
+        }
 
         public Mood Mood;
 
@@ -87,7 +102,13 @@ namespace RealMenGame.Scripts.Bandits
                 }
                 else
                 {
-                    Observable.Timer(delay).Subscribe(_ => _navMeshAgent.enabled = true);
+                    Observable.Timer(delay).Subscribe(_ =>
+                    {
+                        _navMeshAgent.enabled = true;
+                        
+                        _navMeshAgent.SetDestination(CurrentState == BanditState.OnWay ?
+                            WayPoints[_currentWayPoint] : StallManager.Instance.GetRandomTarget().position);
+                    });
                 }
             }
 
