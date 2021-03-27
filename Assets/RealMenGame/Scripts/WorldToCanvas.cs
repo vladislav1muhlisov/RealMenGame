@@ -6,7 +6,12 @@ namespace RealMenGame.Scripts
     {
         [SerializeField] private Transform _target;
         [SerializeField] private RectTransform _canvas;
-        
+
+        private void OnEnable()
+        {
+            Update();
+        }
+
         private void Update()
         {
             if (_target == null) return;
