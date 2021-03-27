@@ -33,7 +33,7 @@ namespace RealMenGame.Scripts
 
         public void SetDamage(int damage)
         {
-            Health.Value -= damage;
+            Health.Value -= 1000;
         }
 
         public void NewGame()
