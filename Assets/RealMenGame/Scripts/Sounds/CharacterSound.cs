@@ -17,6 +17,9 @@ namespace RealMenGame.Scripts.Sounds
         [SerializeField] private List<AudioClip> _angerSounds;
 
         private readonly int _eatingId = Animator.StringToHash("Eating");
+        private readonly int _angerId = Animator.StringToHash("Standing Taunt Battlecry");
+        private readonly int _catchId = Animator.StringToHash("StandCatch");
+        private readonly int _walkId = Animator.StringToHash("Dwarf Walk");
 
         private readonly CompositeDisposable _compositeDisposable = new CompositeDisposable();
 
@@ -33,12 +36,7 @@ namespace RealMenGame.Scripts.Sounds
             foreach (ObservableStateMachineTrigger trigger in triggers)
             {
                 trigger.OnStateEnterAsObservable()
-                    .Subscribe(x =>
-                    {
-                        Debug.LogFormat("state name:{0} nameHash:{1} layerIndex:{2}", x.Animator.name,
-                            x.StateInfo.shortNameHash, x.LayerIndex);
-                        OnAnimatorEvent(x);
-                    })
+                    .Subscribe(OnAnimatorEvent)
                     .AddTo(_compositeDisposable);
             }
         }
@@ -50,18 +48,31 @@ namespace RealMenGame.Scripts.Sounds
 
         private void OnAnimatorEvent(ObservableStateMachineTrigger.OnStateInfo info)
         {
-            if (info.StateInfo.shortNameHash == _eatingId)
+            var shortNameHash = info.StateInfo.shortNameHash;
+            if (shortNameHash == _eatingId)
             {
-                OnEatBegin();
+                PlayRandomSound(_nomSounds);
+            }
+            else if (shortNameHash == _angerId)
+            {
+                PlayRandomSound(_angerSounds);
+            }
+            else if (shortNameHash == _catchId)
+            {
+                PlayRandomSound(_catchSounds);
+            }
+            else if (shortNameHash == _walkId)
+            {
+                PlayRandomSound(_satisfiedSounds);
             }
         }
 
-        private void OnEatBegin()
+        private void PlayRandomSound(List<AudioClip> audioSources)
         {
-            var nomSoundsCount = _nomSounds.Count;
-            if (nomSoundsCount > 0)
+            var count = audioSources.Count;
+            if (count > 0)
             {
-                var randomSound = _nomSounds[Random.Range(0, nomSoundsCount)];
+                var randomSound = audioSources[Random.Range(0, count)];
                 _audioSource.clip = randomSound;
                 _audioSource.Play();
             }
