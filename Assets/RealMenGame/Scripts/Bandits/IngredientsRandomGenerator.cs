@@ -21,7 +21,14 @@ namespace RealMenGame.Scripts.Bandits
         private static Ingredient GetRandomIngredient(IngredientType type)
         {
             var ingredients = IngredientsConfigLoader.Instance.Ingredients;
-            return ingredients[type][Random.Range(0, ingredients[type].Count)];
+            int minId = type == IngredientType.Lavash ? 0 : -1;
+            var randomId = Random.Range(minId, ingredients[type].Count);
+            if (randomId == -1)
+            {
+                return null;
+            }
+
+            return ingredients[type][randomId];
         }
     }
 }
