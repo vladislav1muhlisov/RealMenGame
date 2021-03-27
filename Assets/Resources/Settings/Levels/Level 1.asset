@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   PossibleBandits:
-  - {fileID: 11400000, guid: 6574e00a49a258640aaacf13be609fba, type: 2}
+  - {fileID: 11400000, guid: 2deb1e6ec17c80d44b2715715cade0a1, type: 2}
+  - {fileID: 11400000, guid: e5c2a0f59a8188246a7aa42d85e9565f, type: 2}
+  - {fileID: 11400000, guid: f092c93450a136249bb1b664bbbc3a1d, type: 2}
+  - {fileID: 11400000, guid: 0a3b3412b22fc89419675781b6e160d1, type: 2}
   SpawnChances:
+  - 2
+  - 1
+  - 1
   - 1
   SpawnSpeed: 0.1
-  NextLevelScore: 200
+  NextLevelScore: 600
   MaxHealth: 100

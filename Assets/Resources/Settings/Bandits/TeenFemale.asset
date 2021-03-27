@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7760197827747606257, guid: e01e5522c3c4b734db563b5becb1f9ba, type: 3}
   Damage: 10
-  Score: 10
+  Score: 150
   AnimationRightDelay: 3.5
   AnimationWrongDelay: 6.333
-  AwaySpeed: 0.8
-  NormalSpeed: 0.4
+  AwaySpeed: 1
+  NormalSpeed: 0.5

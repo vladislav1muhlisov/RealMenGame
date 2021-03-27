@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e460297390834fa38d6a59a0f919e236, type: 3}
-  m_Name: Level 2
+  m_Name: Level 3
   m_EditorClassIdentifier: 
   PossibleBandits:
   - {fileID: 11400000, guid: 2deb1e6ec17c80d44b2715715cade0a1, type: 2}
@@ -19,13 +19,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0a3b3412b22fc89419675781b6e160d1, type: 2}
   - {fileID: 11400000, guid: cdcffc54ffad0f8448d16cbe831774ed, type: 2}
   - {fileID: 11400000, guid: 3c83750495b7dd345ad1cd199148f449, type: 2}
+  - {fileID: 11400000, guid: 6574e00a49a258640aaacf13be609fba, type: 2}
+  - {fileID: 11400000, guid: 8d650428159d5ea4198b78e1300191c8, type: 2}
+  - {fileID: 11400000, guid: d1cd6b0df0c498f489947ba0eec93563, type: 2}
   SpawnChances:
   - 2
+  - 3
+  - 1
+  - 1
+  - 1
+  - 1
   - 2
   - 1
   - 1
-  - 1
-  - 1
-  SpawnSpeed: 0.12
-  NextLevelScore: 1900
+  SpawnSpeed: 0.14
+  NextLevelScore: 2500
   MaxHealth: 100

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: JacketFemale
   m_EditorClassIdentifier: 
   Prefab: {fileID: 4347406473280332789, guid: 31e7a4e7ff4f50344a5993a8ef6c98e6, type: 3}
-  Damage: 10
-  Score: 10
+  Damage: 20
+  Score: 200
   AnimationRightDelay: 3.5
   AnimationWrongDelay: 6.333
-  AwaySpeed: 0.8
-  NormalSpeed: 0.4
+  AwaySpeed: 1.1
+  NormalSpeed: 0.6
