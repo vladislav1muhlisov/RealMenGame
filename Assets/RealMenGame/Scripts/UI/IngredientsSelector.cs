@@ -21,6 +21,18 @@ namespace RealMenGame.Scripts.UI
         private List<Ingredient> _ingredients;
         private bool _isRotating;
 
+        private static readonly Dictionary<IngredientType, (KeyCode up, KeyCode down)> inputKeys =
+            new Dictionary<IngredientType, (KeyCode up, KeyCode down)>
+            {
+                {IngredientType.Lavash, (KeyCode.Q, KeyCode.A)},
+                {IngredientType.Vegetables, (KeyCode.W, KeyCode.S)},
+                {IngredientType.Meat, (KeyCode.E, KeyCode.D)},
+                {IngredientType.Sauce, (KeyCode.R, KeyCode.F)}
+            };
+
+        private KeyCode _keyUp;
+        private KeyCode _keyDown;
+
         private readonly List<Ingredient> _ingredientsSlots = new List<Ingredient>
         {
             null, null, null
@@ -32,6 +44,9 @@ namespace RealMenGame.Scripts.UI
 
         private void Awake()
         {
+            _keyUp = inputKeys[ingredientType].up;
+            _keyDown = inputKeys[ingredientType].down;
+
             for (int i = 0; i < buttons.Count; i++)
             {
                 var i1 = i;
@@ -55,19 +70,31 @@ namespace RealMenGame.Scripts.UI
 
         private void Update()
         {
+            if (_isRotating)
+            {
+                return;
+            }
+
             if (_isPointerEnter)
             {
-                if (!_isRotating)
+                if (Input.mouseScrollDelta.y > 0)
                 {
-                    if (Input.mouseScrollDelta.y > 0)
-                    {
-                        RotateUp().Forget();
-                    }
-                    else if (Input.mouseScrollDelta.y < 0)
-                    {
-                        RotateDown().Forget();
-                    }
+                    RotateUp().Forget();
                 }
+                else if (Input.mouseScrollDelta.y < 0)
+                {
+                    RotateDown().Forget();
+                }
+            }
+
+            if (Input.GetKeyDown(_keyUp))
+            {
+                RotateUp().Forget();
+            }
+
+            if (Input.GetKeyDown(_keyDown))
+            {
+                RotateDown().Forget();
             }
         }
 
