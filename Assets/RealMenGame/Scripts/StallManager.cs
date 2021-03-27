@@ -14,7 +14,7 @@ namespace RealMenGame.Scripts
         [SerializeField] private Transform _kebabStartPosition;
         [SerializeField] private float _kebabSpeed = 100f;
 
-        private const float DistanceToFly = 1000f;
+        private const float DistanceToFly = 100f;
 
         public Transform GetRandomTarget() => _targets[Random.Range(0, _targets.Length)];
 

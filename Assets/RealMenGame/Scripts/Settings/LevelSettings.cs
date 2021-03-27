@@ -7,6 +7,8 @@ namespace RealMenGame.Scripts.Settings
     {
         public BanditSettings[] PossibleBandits;
         public float[] SpawnChances;
-        public float SpawnSpeed;
+        public float SpawnSpeed = 0.1f;
+        public int NextLevelScore = 200;
+        public int MaxHealth = 100;
     }
 }

@@ -43,8 +43,6 @@ namespace RealMenGame.Scripts.Bandits
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("TRIGGER");
-
             var projectile = other.GetComponent<KebabProjectile>();
             var kebabIngredients = projectile.Ingredients;
 

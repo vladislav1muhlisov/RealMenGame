@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fullScreenFade: {fileID: 847423384867343372}
+  _levelsSettings: {fileID: 11400000, guid: 648425147ef4de3489af2a88852de881, type: 2}
 --- !u!1 &847423384867343375
 GameObject:
   m_ObjectHideFlags: 0
