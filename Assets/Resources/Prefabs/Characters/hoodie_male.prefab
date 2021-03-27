@@ -655,6 +655,7 @@ GameObject:
   - component: {fileID: 5567995282818459810}
   - component: {fileID: 5530358905294270013}
   - component: {fileID: 7541802119995395166}
+  - component: {fileID: -3491689963245061977}
   m_Layer: 0
   m_Name: hoodie_male
   m_TagString: Untagged
@@ -889,6 +890,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &-3491689963245061977
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957422256221345659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.48
+  m_Height: 1.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4957422256221345987
 GameObject:
   m_ObjectHideFlags: 0

@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 5538029555274209881}
   - component: {fileID: 4347406473280332789}
   - component: {fileID: 8255222358592849382}
+  - component: {fileID: -5150268590855364086}
   m_Layer: 0
   m_Name: jacket_female
   m_TagString: Untagged
@@ -770,6 +771,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &-5150268590855364086
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2853417869965597546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.48
+  m_Height: 1.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2853417869965597914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3172,14 +3187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7bb8b5241b420d993a270c86e09b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2847129488815645433 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3446100792776461005, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
-  m_PrefabInstance: {fileID: 598991149470279732}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6840691851237521652 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6250732091251396800, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
+  m_PrefabInstance: {fileID: 598991149470279732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2847129488815645433 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3446100792776461005, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
   m_PrefabInstance: {fileID: 598991149470279732}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2067801440285387090

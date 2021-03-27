@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 720296902956033743}
   - component: {fileID: 1644858799076557554}
   - component: {fileID: 1818622378734908125}
+  - component: {fileID: 7679239262651604707}
   m_Layer: 0
   m_Name: teen_male
   m_TagString: Untagged
@@ -977,6 +978,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &7679239262651604707
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7196896610557929288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.48
+  m_Height: 1.75
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7196902067255026454
 GameObject:
   m_ObjectHideFlags: 0
@@ -6205,11 +6220,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
---- !u!224 &2783687489591255128 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3446100792776461005, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
-  m_PrefabInstance: {fileID: 680790577115769493}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &166640797021969150 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 802381255910764651, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
@@ -6224,6 +6234,11 @@ MonoBehaviour:
 --- !u!1 &6903359433897130581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6250732091251396800, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
+  m_PrefabInstance: {fileID: 680790577115769493}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2783687489591255128 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3446100792776461005, guid: 188d2a26c3f897948b20e0e4f84ea14f, type: 3}
   m_PrefabInstance: {fileID: 680790577115769493}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5247995626054048826
